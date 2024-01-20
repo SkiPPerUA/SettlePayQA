@@ -67,4 +67,8 @@ int expectedStatus = 2;
 
         }
     }
+
+    public void testqq(){
+        logger.error("fs");
+    }
 }

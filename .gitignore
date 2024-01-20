@@ -37,5 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-src/test/java/projectSettlePayTests/test1.java
+src/test/java/projectSettlePayTests/test.java
 target/log.log
