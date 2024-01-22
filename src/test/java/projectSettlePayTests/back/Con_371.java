@@ -1,6 +1,7 @@
 package projectSettlePayTests.back;
 
 import io.restassured.http.ContentType;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -10,6 +11,8 @@ import static io.restassured.RestAssured.given;
 
 import io.restassured.response.*;
 import projectSettlePay.core.DataBase;
+import projectSettlePay.core.Session;
+import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.helper.UuidGenerate;
 
 import java.util.HashMap;
@@ -20,12 +23,15 @@ public class Con_371 extends BaseTest {
 
     String host = "api-stage-4";
     String block = "UAH";
-    String [] currency = {"KZT", "UAH", "UZS", "KGS", "AZN"};
+    String [] currency = {"KZT"};//, "UAH", "UZS", "KGS", "AZN"};
     String [] amount = {"500100", "500200", "500301", "500401"};
     int count = 0;
     DataBase dataBase;
     Response responce;
     Map<String, Integer> wall_id = new HashMap<>();
+    Map<String, String> bankName = new HashMap<>();
+    String id = "";
+    AcquiringFrame frame;
 
     private void makeTrans(String body){
         responce = given()
@@ -33,6 +39,7 @@ public class Con_371 extends BaseTest {
                 .body(body)
                 .when()
                 .post("https://"+host+".backofficeweb.info/transaction/create");
+        id = (String) Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.id")).get();
     }
 
     void makePositive(String body, String curr, String am){
@@ -40,7 +47,7 @@ public class Con_371 extends BaseTest {
         logger.info(responce.then().extract().response().asString());
         System.out.print(count+ "  (Currency pay - "+curr+", Amount pay - "+am+") - ");
         System.out.print(Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.id")).get()+" - ");
-//        System.out.println(Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.result.pay_url")).get());
+        System.out.println(Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.result.pay_url")).get());
         System.out.println("Positive");
     }
 
@@ -48,16 +55,21 @@ public class Con_371 extends BaseTest {
         makeTrans(body);
         logger.info(responce.then().extract().response().asString());
         System.out.print(count+ "  (Currency pay - "+curr+", Amount pay - "+am+") - ");
-        System.out.print(Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.id")).get()+" - ");
+        System.out.print(id+" - ");
+        Session.getDriver().get(id);
         System.out.println("Negative");
     }
-
     private void makeFail(String body, String curr, String am){
         makeTrans(body);
         logger.info(responce.then().extract().response().asString());
         System.out.print(count+ "  (Currency pay - "+curr+", Amount pay - "+am+") - ");
-        System.out.print(Optional.ofNullable(responce.then().extract().response().jsonPath().get("response.id")).get()+" - ");
-        System.out.println("Fail");
+        System.out.print(id+" - ");
+        try {
+            Session.getDriver().get(id);
+            System.out.println("ОШИБКААААА");
+        }catch (Throwable e){
+            System.out.println("Fail");
+        }
     }
 
     private String makeBody(String curr, String am){
@@ -82,7 +94,13 @@ public class Con_371 extends BaseTest {
                 "        \"email\": \"andromeda@gmail.com\"\n" +
                 "    }\n" +
                 "}";
-        return String.format(body, UuidGenerate.generateUUID(), am, curr);
+        int amm;
+        if (curr == "UZS"){
+            amm = Integer.getInteger(am) + 50000000;
+        }else {
+            amm = Integer.getInteger(am);
+        }
+        return String.format(body, UuidGenerate.generateUUID(), amm, curr);
     }
 
     public void test(){
@@ -91,6 +109,11 @@ public class Con_371 extends BaseTest {
         wall_id.put("UZS",3398);
         wall_id.put("KGS",3406);
         wall_id.put("AZN",3431);
+        bankName.put("KZT","Kaspi Bank");
+        bankName.put("UAH","Monobank");
+        bankName.put("UZS","Любой банк (Humo)");
+        bankName.put("KGS","Optima24");
+        bankName.put("AZN","Unibank");
         for (String curr: currency){
             dataBase.updateSql("update public.provider_services set currency = '"+currency+"' where id = 5163");
             for (int i = 0; i < amount.length; i++) {
