@@ -140,15 +140,20 @@ public class Protocol {
         }
     }
 
-    public void commission_line_elements(List<Integer> service_commission_lines$ids){
+    public void commission_line_elements(List<Integer> service_commission_lines$ids, boolean pay_in){
         dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_rounding,result_rounding_scale)\n" +
                 "values ("+service_commission_lines$ids.get(0)+",'calc_company_reward',0,0,2,'formula',0,4);");
         dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale)\n" +
                 "values ("+service_commission_lines$ids.get(0)+",'buying_price',0,0,1,'customer_amount','final_amount',0,4);");
         dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale)\n" +
                 "values ("+service_commission_lines$ids.get(1)+",'customer',0,0,2,'amount','final_amount',1,2);");
-        dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale,wallet_from)\n" +
-                "values ("+service_commission_lines$ids.get(1)+",'point',0,0,1,'amount','final_amount',0,4,3);");
+            if (pay_in) {
+                dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale,wallet_from)\n" +
+                        "values (" + service_commission_lines$ids.get(1) + ",'point',0,0,1,'amount','final_amount',0,4,3);");
+            }else {
+                dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale,wallet_to)\n" +
+                        "values (" + service_commission_lines$ids.get(1) + ",'point',0,0,1,'amount','final_amount',0,4,3);");
+            }
         dataApiPay.updateSql("insert into public.service_commission_line_elements(line_id,type_id,commission_percent,commission_amount,priority,base_type,result_type,result_rounding,result_rounding_scale)\n" +
                 "values ("+service_commission_lines$ids.get(1)+",'provider',0,0,3,'amount','final_amount',1,2);");
     }

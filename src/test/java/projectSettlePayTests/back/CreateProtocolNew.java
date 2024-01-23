@@ -25,6 +25,7 @@ public class CreateProtocolNew {
     String points$name = "Точка стейдж 7";
     String accounts$name = "Аккаунт стейдж 7";
     boolean forMerchant = false;
+    boolean pay_in = true;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
@@ -62,7 +63,7 @@ public class CreateProtocolNew {
 
         protocol.service_commission_lines(protocol.getServices$id());
 
-        protocol.commission_line_elements(protocol.getService_commission_lines$ids());
+        protocol.commission_line_elements(protocol.getService_commission_lines$ids(), pay_in);
 
         protocol.service_provider_services(protocol.getServices$id(), protocol.getProvider_services$id());
 
