@@ -12,19 +12,19 @@ abstract class ProvidersMethods {
     protected Response response;
     void create(IProviders provider){
         logerName(provider);
-        String urlRequest = String.format("https://api-stage-%s.backofficeweb.info/transaction/create",provider.getCore());
+        String urlRequest = getEnvinronment(provider.getCore())+"/transaction/create";
         logger.info("URL - "+urlRequest);
-        response = given()
-                .contentType(ContentType.JSON)
-                .body(provider.getBody())
-                .when()
-                .post(urlRequest);
-        logger.info("Create - "+getResponce());
+//        response = given()
+//                .contentType(ContentType.JSON)
+//                .body(provider.getBody())
+//                .when()
+//                .post(urlRequest);
+//        logger.info("Create - "+getResponce());
     }
 
     void pay(IProviders provider){
         logerName(provider);
-        String urlRequest = String.format("https://api-stage-%s.backofficeweb.info/transaction/pay",provider.getCore());
+        String urlRequest = getEnvinronment(provider.getCore())+"/transaction/pay";
         logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
@@ -38,5 +38,13 @@ abstract class ProvidersMethods {
 
     private void logerName(IProviders providers){
         logger.info("Provider = "+providers.toString());
+    }
+
+    private String getEnvinronment(int core){
+        if (core == 1){
+            return "https://api-new.backofficeweb.info/";
+        }else {
+            return String.format("https://api-stage-%s.backofficeweb.info",core);
+        }
     }
 }

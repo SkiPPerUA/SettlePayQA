@@ -1,25 +1,34 @@
 package projectSettlePay.back.Providers;
 
-public class MoneyGram extends ProvidersMethods implements IProviders {
+import projectSettlePay.helper.UuidGenerate;
 
-    private int core = 4;
-    private int conn = 4;
+public class PayNetEasy extends ProvidersMethods implements IProviders {
+
+    private int core = 3;
+    private int conn = 3;
     private String body = "";
 
-    public MoneyGram(String body){
+    public PayNetEasy(String body){
         this.body = body;
     }
 
     public void pay_in(){
+        create(this);
     }
 
-    public void pay_out(){
-        pay(this);
+    @Override
+    public void pay_out() {
+        //
     }
 
     @Override
     public int getCore() {
         return core;
+    }
+
+    @Override
+    public int getConn() {
+        return conn;
     }
 
     @Override
@@ -44,33 +53,25 @@ public class MoneyGram extends ProvidersMethods implements IProviders {
         return String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
     }
 
-    @Override
-    public int getConn() {
-        return conn;
-    }
-
-    public static class MoneyGramBody{
+    public static class PayNetEasyBody{
         public static String defaultBody(){
             return "{\n" +
                     "    \"auth\": {\n" +
                     "        \"debug\": true,\n" +
-                    "        \"point\": 2755,\n" +
+                    "        \"point\": 1,\n" +
                     "        \"key\": 1,\n" +
-                    "        \"hash\": \"23890751a791b6936b547972fc0cde42\"\n" +
+                    "        \"hash\": \"c9194644d4316e008a7afb0d50bf056b\"\n" +
                     "    },\n" +
-                    "    \"locale\": \"ru\",\n" +
+                    "    \"locale\": \"ua\",\n" +
+                    "    \"external_order_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"external_customer_id\": \"65865403\",\n" +
-                    "    \"account_id\": 2761,\n" +
-                    "    \"wallet_id\": 2605,\n" +
-                    "    \"service_id\": 3434,\n" +
-                    "    \"amount\": 100,\n" +
-                    "    \"amount_currency\": \"USDC\",\n" +
-                    "    \"fields\": {\n" +
-                    "        \"email\": \"o.naumenko@4bill.io\"\n" +
-                    "    }\n" +
+                    "    \"account_id\": 4,\n" +
+                    "    \"wallet_id\": 118,\n" +
+                    "    \"service_id\": 3337,\n" +
+                    "    \"amount\": 1000,\n" +
+                    "    \"amount_currency\": \"EUR\" \n" +
                     "}";
         }
     }
-
 }
