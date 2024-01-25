@@ -1,10 +1,14 @@
 package projectSettlePay.back.Providers;
 
-public class AllianceECom extends ProvidersMethods implements IProviders {
+import projectSettlePay.front.IFrame;
+
+public class AllianceECom extends ProvidersMethods implements Pay_in {
 
     private int core = 8;
     private int conn = 8;
     private String body = "";
+
+    private IFrame frame;
 
     public AllianceECom(String body){
         this.body = body;
@@ -14,7 +18,9 @@ public class AllianceECom extends ProvidersMethods implements IProviders {
         create(this);
     }
 
-    public void pay_out(){
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     @Override

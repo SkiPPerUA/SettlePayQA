@@ -1,12 +1,16 @@
 package projectSettlePay.back.Providers;
 
+import projectSettlePay.front.FourBillFrame;
+import projectSettlePay.front.IFrame;
 import projectSettlePay.helper.UuidGenerate;
 
-public class PayNetEasy extends ProvidersMethods implements IProviders {
+public class PayNetEasy extends ProvidersMethods implements Pay_in {
 
     private int core = 3;
     private int conn = 3;
     private String body = "";
+
+    private IFrame frame = new FourBillFrame();
 
     public PayNetEasy(String body){
         this.body = body;
@@ -14,11 +18,6 @@ public class PayNetEasy extends ProvidersMethods implements IProviders {
 
     public void pay_in(){
         create(this);
-    }
-
-    @Override
-    public void pay_out() {
-        //
     }
 
     @Override
@@ -47,6 +46,11 @@ public class PayNetEasy extends ProvidersMethods implements IProviders {
 
     public String getPayURL(){
         return response.then().extract().response().jsonPath().get("response.result.pay_url");
+    }
+
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     public String getId(){

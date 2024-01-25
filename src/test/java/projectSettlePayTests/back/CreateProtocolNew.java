@@ -2,28 +2,31 @@ package projectSettlePayTests.back;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
+import projectSettlePay.BaseTest;
+import projectSettlePay.back.AquairingLogic;
 import projectSettlePay.back.ILogicServices;
 import projectSettlePay.back.P2PLogic;
 import projectSettlePay.back.Protocol;
+import projectSettlePay.core.DataBase;
 import projectSettlePay.helper.MD5hash;
 
 import java.sql.SQLException;
 
 @Test
-public class CreateProtocolNew {
-    Protocol protocol = new Protocol("apipay_new_stage1");
-    int protocol_id = 118;
+public class CreateProtocolNew extends BaseTest {
+    Protocol protocol = new Protocol(DataBase.DataBaseName.CONN_STAGE_1);
+    int protocol_id = 135;
     String name_protocolId = "NameProtocol";
 
 
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
-    ILogicServices servicesProtocol = new P2PLogic();
-    int providers_id = 5164;
-    String provider_services$name = "TestVladTEST123";
+    ILogicServices servicesProtocol = new AquairingLogic();
+    int providers_id = 5165;
+    String provider_services$name = "GeoPay";
     String provider_services$currency = "UAH";
-    String gateway_logic = "logics.services.wallet_topup_via_p2p_form.v1.logic";
-    String points$name = "Точка стейдж 7";
-    String accounts$name = "Аккаунт стейдж 7";
+    String gateway_logic = "logics.services.card_credit.v1.logic";
+    String points$name = "Точка стейдж 1";
+    String accounts$name = "Аккаунт стейдж 2";
     boolean forMerchant = false;
     boolean pay_in = true;
 
@@ -36,7 +39,7 @@ public class CreateProtocolNew {
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1034,protocol_id);
+        protocol.change_connector_protocolId(1058,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола

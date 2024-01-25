@@ -14,12 +14,12 @@ abstract class ProvidersMethods {
         logerName(provider);
         String urlRequest = getEnvinronment(provider.getCore())+"/transaction/create";
         logger.info("URL - "+urlRequest);
-//        response = given()
-//                .contentType(ContentType.JSON)
-//                .body(provider.getBody())
-//                .when()
-//                .post(urlRequest);
-//        logger.info("Create - "+getResponce());
+        response = given()
+                .contentType(ContentType.JSON)
+                .body(provider.getBody())
+                .when()
+                .post(urlRequest);
+        logger.info("Create - "+getResponce());
     }
 
     void pay(IProviders provider){

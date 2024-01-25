@@ -1,10 +1,15 @@
 package projectSettlePay.back.Providers;
 
-public class OnePay extends ProvidersMethods implements IProviders {
+import projectSettlePay.front.AcquiringFrame;
+import projectSettlePay.front.IFrame;
+
+public class OnePay extends ProvidersMethods implements Pay_in, Pay_out {
 
     private int core = 3;
     private int conn = 3;
     private String body = "";
+
+    private AcquiringFrame frame = new AcquiringFrame();
 
     public OnePay(String body){
         this.body = body;
@@ -16,6 +21,11 @@ public class OnePay extends ProvidersMethods implements IProviders {
 
     public void pay_out(){
         pay(this);
+    }
+
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     @Override

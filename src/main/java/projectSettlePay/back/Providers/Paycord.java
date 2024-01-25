@@ -1,12 +1,15 @@
 package projectSettlePay.back.Providers;
 
+import projectSettlePay.front.IFrame;
 import projectSettlePay.helper.UuidGenerate;
 
-public class Paycord extends ProvidersMethods implements IProviders {
+public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
 
     private int core = 5;
     private int conn = 5;
     private String body = "";
+
+    private IFrame frame;
 
     public Paycord(String body){
         this.body = body;
@@ -14,6 +17,11 @@ public class Paycord extends ProvidersMethods implements IProviders {
 
     public void pay_in(){
         create(this);
+    }
+
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     public void pay_out(){

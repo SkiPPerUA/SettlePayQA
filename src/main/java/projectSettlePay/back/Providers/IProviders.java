@@ -4,10 +4,6 @@ import java.util.List;
 
 public interface IProviders {
 
-     void pay_in();
-
-     void pay_out();
-
      String getBody();
 
      int getCore();
@@ -18,17 +14,15 @@ public interface IProviders {
 
      String getResponce();
 
-     String getPayURL();
-
      String getId();
 
-     static List<IProviders> getAllPayIn(){
-          return List.of(new OnePay(OnePay.OnePayBody.defaultBody(true)),
-          new Anymoney(Anymoney.AnymoneyBody.defaultBody(true)),
-          new P2Pay(P2Pay.P2PayBody.defaultBody(true)),
-          new Paycord(Paycord.PaycordBody.defaultBody(true)),
-          new TwoPayler(TwoPayler.TwoPaylerBody.defaultBody(true)),
-          new Xpay365(Xpay365.Xpay365Body.defaultBody(true)));
+     static List<Pay_in> getAllPayIn(){
+          return List.of(new OnePay(OnePay.OnePayBody.defaultBody(true)));
+     }
+
+     static List<Pay_out> getAllPayOut(){
+          return List.of(new OnePay(OnePay.OnePayBody.defaultBody(false)),
+                  new MoneyGram(MoneyGram.MoneyGramBody.defaultBody()));
      }
 
 }

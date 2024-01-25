@@ -1,10 +1,14 @@
 package projectSettlePay.back.Providers;
 
-public class Anymoney extends ProvidersMethods implements IProviders {
+import projectSettlePay.front.IFrame;
+
+public class Anymoney extends ProvidersMethods implements Pay_in {
 
     private int core = 1;
     private int conn = 1;
     private String body = "";
+
+    private IFrame frame;
 
     public Anymoney(String body){
         this.body = body;
@@ -14,8 +18,9 @@ public class Anymoney extends ProvidersMethods implements IProviders {
         create(this);
     }
 
-    public void pay_out(){
-        pay(this);
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     @Override

@@ -1,13 +1,22 @@
 package projectSettlePay.back.Providers;
 
-public class TwoPayler extends ProvidersMethods implements IProviders {
+import projectSettlePay.front.IFrame;
+
+public class TwoPayler extends ProvidersMethods implements Pay_out, Pay_in {
 
     private int core = 1;
     private int conn = 6;
     private String body = "";
 
+    private IFrame frame;
+
     public TwoPayler(String body){
         this.body = body;
+    }
+
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     public void pay_in(){

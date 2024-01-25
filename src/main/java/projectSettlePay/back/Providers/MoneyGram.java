@@ -1,6 +1,6 @@
 package projectSettlePay.back.Providers;
 
-public class MoneyGram extends ProvidersMethods implements IProviders {
+public class MoneyGram extends ProvidersMethods implements Pay_out{
 
     private int core = 4;
     private int conn = 4;
@@ -8,13 +8,6 @@ public class MoneyGram extends ProvidersMethods implements IProviders {
 
     public MoneyGram(String body){
         this.body = body;
-    }
-
-    public void pay_in(){
-    }
-
-    public void pay_out(){
-        pay(this);
     }
 
     @Override
@@ -36,10 +29,6 @@ public class MoneyGram extends ProvidersMethods implements IProviders {
         return response.then().extract().response().asString();
     }
 
-    public String getPayURL(){
-        return response.then().extract().response().jsonPath().get("response.result.pay_url");
-    }
-
     public String getId(){
         return String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
     }
@@ -47,6 +36,11 @@ public class MoneyGram extends ProvidersMethods implements IProviders {
     @Override
     public int getConn() {
         return conn;
+    }
+
+    @Override
+    public void pay_out() {
+        create(this);
     }
 
     public static class MoneyGramBody{

@@ -1,10 +1,14 @@
 package projectSettlePay.back.Providers;
 
-public class Xpay365 extends ProvidersMethods implements IProviders {
+import projectSettlePay.front.IFrame;
+
+public class Xpay365 extends ProvidersMethods implements Pay_out, Pay_in {
 
     private int core = 3;
     private int conn = 2;
     private String body = "";
+
+    private IFrame frame;
 
     public Xpay365(String body){
         this.body = body;
@@ -14,6 +18,10 @@ public class Xpay365 extends ProvidersMethods implements IProviders {
         create(this);
     }
 
+    @Override
+    public IFrame getFrame() {
+        return frame;
+    }
     public void pay_out(){
         pay(this);
     }

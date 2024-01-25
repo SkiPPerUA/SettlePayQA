@@ -5,7 +5,7 @@ import projectSettlePay.helper.CurrentData;
 public class AquairingLogic implements ILogicServices{
     @Override
     public String getMethod() {
-        return null;
+        return "card_debit_h2h";
     }
 
     @Override

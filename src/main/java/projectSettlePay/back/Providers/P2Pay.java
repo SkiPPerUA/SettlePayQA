@@ -1,12 +1,15 @@
 package projectSettlePay.back.Providers;
 
+import projectSettlePay.front.IFrame;
 import projectSettlePay.helper.UuidGenerate;
 
-public class P2Pay extends ProvidersMethods implements IProviders {
+public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
 
     private int core = 4;
     private int conn = 4;
     private String body = "";
+
+    private IFrame frame;
 
     public P2Pay(String body){
         this.body = body;
@@ -14,6 +17,11 @@ public class P2Pay extends ProvidersMethods implements IProviders {
 
     public void pay_in(){
         create(this);
+    }
+
+    @Override
+    public IFrame getFrame() {
+        return frame;
     }
 
     public void pay_out(){

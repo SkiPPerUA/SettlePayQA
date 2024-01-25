@@ -5,7 +5,7 @@ import projectSettlePay.core.GUIButton;
 import projectSettlePay.core.GUITextBox;
 import projectSettlePay.core.Locator;
 
-public class AcquiringFrame {
+public class AcquiringFrame implements IFrame{
     
     private int step = 1;
     public AcquiringFrame choiceBank(String bankName){
@@ -35,7 +35,7 @@ public class AcquiringFrame {
     }
 
     public AcquiringFrame confirm(){
-        GUIButton button = new GUIButton(new Locator().xpath(" //label[@for='confirm']"));
+        GUIButton button = new GUIButton(new Locator().xpath("//label[@for='confirm']"));
         button.click();
         return this;
     }
@@ -44,5 +44,12 @@ public class AcquiringFrame {
         GUITextBox button = new GUITextBox(new Locator().xpath("//input[@type='text']"));
         button.addText(otp);
         return this;}
+
+    @Override
+    public void positiveSteps() {
+        step = 2;
+        confirm();
+        next();
+    }
 }
 
