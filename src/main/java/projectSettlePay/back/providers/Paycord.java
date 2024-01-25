@@ -1,7 +1,6 @@
-package projectSettlePay.back.Providers;
+package projectSettlePay.back.providers;
 
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
 
 public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
 

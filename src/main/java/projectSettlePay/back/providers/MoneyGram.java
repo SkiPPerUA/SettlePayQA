@@ -1,4 +1,4 @@
-package projectSettlePay.back.Providers;
+package projectSettlePay.back.providers;
 
 public class MoneyGram extends ProvidersMethods implements Pay_out{
 

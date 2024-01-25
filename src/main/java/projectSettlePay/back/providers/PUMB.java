@@ -1,4 +1,4 @@
-package projectSettlePay.back.Providers;
+package projectSettlePay.back.providers;
 
 public class PUMB extends ProvidersMethods implements Pay_out{
 

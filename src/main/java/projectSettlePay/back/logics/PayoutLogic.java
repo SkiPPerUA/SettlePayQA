@@ -1,4 +1,4 @@
-package projectSettlePay.back;
+package projectSettlePay.back.logics;
 
 import projectSettlePay.helper.CurrentData;
 

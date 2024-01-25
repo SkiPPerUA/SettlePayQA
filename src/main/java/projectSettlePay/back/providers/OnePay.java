@@ -1,4 +1,4 @@
-package projectSettlePay.back.Providers;
+package projectSettlePay.back.providers;
 
 import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;

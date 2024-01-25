@@ -1,4 +1,4 @@
-package projectSettlePay.back.Providers;
+package projectSettlePay.back.providers;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

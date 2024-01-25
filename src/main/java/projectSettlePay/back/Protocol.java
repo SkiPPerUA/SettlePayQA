@@ -1,6 +1,7 @@
 package projectSettlePay.back;
 
 import org.testng.Assert;
+import projectSettlePay.back.logics.ILogicServices;
 import projectSettlePay.core.DataBase;
 import projectSettlePay.helper.CurrentData;
 import org.apache.log4j.Logger;

@@ -1,4 +1,4 @@
-package projectSettlePay.back;
+package projectSettlePay.back.logics;
 public interface ILogicServices {
     String getMethod();
 
