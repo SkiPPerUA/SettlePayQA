@@ -1,6 +1,5 @@
 package projectSettlePay.back.providers;
 
-import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.front.PayCashFrame;
 

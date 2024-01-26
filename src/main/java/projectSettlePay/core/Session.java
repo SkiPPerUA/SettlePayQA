@@ -30,8 +30,9 @@ public class Session {
         if (driver != null){
             driver.close();
             driver.quit();
+            driver = null;
+            logger.info("Драйвер закрыт");
         }
-        logger.info("Драйвер закрыт");
     }
 
     public static WebDriverWait getDriverWait(){

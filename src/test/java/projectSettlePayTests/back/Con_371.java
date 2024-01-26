@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import io.restassured.response.*;
 import projectSettlePay.core.DataBase;
 import projectSettlePay.core.Session;
-import projectSettlePay.front.AcquiringFrame;
+import projectSettlePay.front.AcquiringFrame1;
 import projectSettlePay.helper.UuidGenerate;
 
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class Con_371 extends BaseTest {
     Map<String, Integer> wall_id = new HashMap<>();
     Map<String, String> bankName = new HashMap<>();
     String id = "";
-    AcquiringFrame frame;
+    AcquiringFrame1 frame;
 
     private void makeTrans(String body){
         responce = given()

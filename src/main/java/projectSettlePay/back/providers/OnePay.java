@@ -1,6 +1,6 @@
 package projectSettlePay.back.providers;
 
-import projectSettlePay.front.AcquiringFrame;
+import projectSettlePay.front.AcquiringFrame1;
 import projectSettlePay.front.IFrame;
 
 public class OnePay extends ProvidersMethods implements Pay_in, Pay_out {
@@ -9,7 +9,7 @@ public class OnePay extends ProvidersMethods implements Pay_in, Pay_out {
     private int conn = 3;
     private String body = "";
 
-    private AcquiringFrame frame = new AcquiringFrame();
+    private AcquiringFrame1 frame = new AcquiringFrame1();
 
     public OnePay(String body){
         this.body = body;

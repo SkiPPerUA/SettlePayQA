@@ -1,7 +1,7 @@
 package projectSettlePay.back.providers;
 
 import projectSettlePay.front.IFrame;
-import projectSettlePay.front.PrimePayFrame;
+import projectSettlePay.front.AcquiringFrame;
 
 public class PrimePay extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -9,7 +9,7 @@ public class PrimePay extends ProvidersMethods implements Pay_in, Pay_out {
     private int conn = 7;
     private String body = "";
 
-    private PrimePayFrame frame = new PrimePayFrame();
+    private AcquiringFrame frame = new AcquiringFrame();
 
     public PrimePay(String body){
         this.body = body;
