@@ -4,8 +4,8 @@ import projectSettlePay.front.IFrame;
 
 public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
 
-    private int core = 5;
-    private int conn = 5;
+    private int core = 7;
+    private int conn = 6;
     private String body = "";
 
     private IFrame frame;
@@ -65,18 +65,18 @@ public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
                 return "{\n" +
                         "    \"auth\": {\n" +
                         "        \"debug\": true,\n" +
-                        "        \"point\": 1,\n" +
+                        "        \"point\": 2759,\n" +
                         "        \"key\": 1,\n" +
-                        "        \"hash\": \"c9194644d4316e008a7afb0d50bf056b\"\n" +
+                        "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"en\",\n" +
                         "    \"external_order_id\": \"100\",\n" +
                         "    \"external_customer_id\": \"3\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"account_id\": 4,\n" +
-                        "    \"wallet_id\": 117,\n" +
-                        "    \"service_id\": 1622,\n" +
-                        "    \"amount\": 30100,\n" +
+                        "    \"account_id\": 2765,\n" +
+                        "    \"wallet_id\": 2561,\n" +
+                        "    \"service_id\": 3354,\n" +
+                        "    \"amount\": 10099,\n" +
                         "    \"amount_currency\": \"INR\",\n" +
                         "    \"point\":{\n" +
                         "        \"return_url\": \"https://google.com\"\n" +
@@ -94,20 +94,19 @@ public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
                 return "{\n" +
                         "    \"auth\": {\n" +
                         "        \"debug\": true,\n" +
-                        "        \"point\": 1,\n" +
+                        "        \"point\": 2759,\n" +
                         "        \"key\": 1,\n" +
-                        "        \"hash\": \"c9194644d4316e008a7afb0d50bf056b\"\n" +
+                        "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
                         "    \"external_order_id\": \"100\",\n" +
                         "    \"external_customer_id\": \"3\",\n" +
                         "    \"customer_ip_address\": \"10.10.0.0\",\n" +
-                        "    \"account_id\": 4,\n" +
-                        "    \"wallet_id\": 117,\n" +
-                        "    \"service_id\": 1623,\n" +
+                        "    \"account_id\": 2765,\n" +
+                        "    \"wallet_id\": 2561,\n" +
+                        "    \"service_id\": 3355,\n" +
                         "    \"amount\": 30200,\n" +
                         "    \"amount_currency\": \"INR\",\n" +
-                        "    \n" +
                         "    \"fields\": {\n" +
                         "        \"TxnMode\": \"NB\",\n" +
                         "        \"BeneficiaryEmail\": \"test@test.com\",\n" +

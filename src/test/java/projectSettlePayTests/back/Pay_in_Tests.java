@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
 import projectSettlePay.back.providers.*;
 import projectSettlePay.core.Session;
+import projectSettlePay.front.IFrame;
+
 import java.util.List;
 
 @Test
@@ -12,6 +14,7 @@ public class Pay_in_Tests extends BaseTest {
 
     int testConn = 3;
     List<Pay_in> providers = List.of(
+            new Paycord(Paycord.PaycordBody.defaultBody(true)),
             new PrimePay(PrimePay.PrimePayBody.defaultBody(true)),
             new PayECards(PayECards.PayECardsBody.defaultBody()),
             new PayCash(PayCash.PayCashBody.defaultBody()),
@@ -27,7 +30,12 @@ public class Pay_in_Tests extends BaseTest {
               System.out.println(": trans - (parent) "+prov.getId()+"  (child) - "+child);
               System.out.println("https://preprod-agora2.backofficeweb.info/transactions/transactions/"+child);
               Session.getDriver().get(prov.getPayURL());
-              prov.getFrame().positiveSteps();
+              IFrame frame = prov.getFrame();
+              if (frame == null){
+                  Thread.sleep(20000);
+              }else {
+                  frame.positiveSteps();
+              }
               Thread.sleep(5000);
           }
       }
