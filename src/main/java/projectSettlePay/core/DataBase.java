@@ -63,6 +63,7 @@ public class DataBase {
     }
 
     public interface DataBaseName{
-        String CONN_STAGE_1 = "apipay_new_stage1";
+        String APIPAY_STAGE_1 = "apipay_new_stage1";
+        String CONN_STAGE_1 = "provider_connector_service_stage";
     }
 }

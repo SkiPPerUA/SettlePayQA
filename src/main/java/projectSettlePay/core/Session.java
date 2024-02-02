@@ -20,7 +20,7 @@ public class Session {
             options.addArguments("--remote-allow-origins=*");
             options.addArguments("start-maximized");
             driver = new ChromeDriver(options);
-            driverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            driverWait = new WebDriverWait(driver, Duration.ofSeconds(15));
             logger.info("Драйвер открыт");
         }
         return driver;
@@ -31,6 +31,7 @@ public class Session {
             driver.close();
             driver.quit();
             driver = null;
+            driverWait = null;
             logger.info("Драйвер закрыт");
         }
     }

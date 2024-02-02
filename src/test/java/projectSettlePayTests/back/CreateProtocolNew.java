@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 @Test
 public class CreateProtocolNew extends BaseTest {
-    Protocol protocol = new Protocol(DataBase.DataBaseName.CONN_STAGE_1);
+    Protocol protocol = new Protocol(DataBase.DataBaseName.APIPAY_STAGE_1);
     int protocol_id = 135;
     String name_protocolId = "NameProtocol";
 

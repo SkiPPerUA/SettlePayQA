@@ -29,4 +29,10 @@ public abstract class BaseTest implements DataBase.DataBaseName{
         }
         return dataBase;
     }
+
+    protected String getAgoraURL(String trans_id){
+        long id = Long.valueOf(trans_id);
+        long child = id + 1;
+        return "https://preprod-agora2.backofficeweb.info/transactions/transactions/"+child;
+    }
 }

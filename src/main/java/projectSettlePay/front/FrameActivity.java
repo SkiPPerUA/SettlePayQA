@@ -6,7 +6,7 @@ import projectSettlePay.core.Locator;
 
 abstract class FrameActivity {
 
-    protected int step = 1;
+    public int step = 1;
     public void setCardNumber(String pan){
         GUITextBox box = new GUITextBox(new Locator().xpath("//input[@id=\"card_number\"]"));
         box.addText(pan.toCharArray());
@@ -86,6 +86,15 @@ abstract class FrameActivity {
     public void setCard(String card){
         GUITextBox box = new GUITextBox(new Locator().xpath("//input[@name=\"card_number\"]"));
         box.addText(card.toCharArray());
+    }
+
+    public void cancel(){
+        GUIButton button = new GUIButton(new Locator().xpath("//div[text()='Заповніть необхідні персональні дані']/../div[1]/div[1]"));
+        button.click();
+    }
+
+    public void confirmCancel(){
+        new GUIButton(new Locator().xpath("//button[text()='Підтвердити']")).click();
     }
 
     public void choiceBank(String bankName){
