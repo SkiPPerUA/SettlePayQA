@@ -42,7 +42,7 @@ public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
         return body;
     }
 
-    public String getResponce(){
+    public String getResponse(){
         return response.then().extract().response().asString();
     }
 

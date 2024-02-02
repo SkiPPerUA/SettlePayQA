@@ -225,7 +225,7 @@ public class PayPortPayIn extends BaseTest {
                     "                    \"    }\\n\" +\n" +
                     "                    \"}");
             payPort.pay_in();
-            Assert.assertTrue(payPort.getResponce().contains("\"Bad request\""));
+            Assert.assertTrue(payPort.getResponse().contains("\"Bad request\""));
     }
 
     @Test(dataProvider = "name_Negative")

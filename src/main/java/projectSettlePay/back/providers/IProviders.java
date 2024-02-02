@@ -12,7 +12,7 @@ public interface IProviders {
 
      void setCore(int core);
 
-     String getResponce();
+     String getResponse();
 
      String getId();
 

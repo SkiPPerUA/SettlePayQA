@@ -38,7 +38,7 @@ public class Anymoney extends ProvidersMethods implements Pay_in {
         return body;
     }
 
-    public String getResponce(){
+    public String getResponse(){
         return response.then().extract().response().asString();
     }
 
