@@ -5,7 +5,7 @@ import projectSettlePay.helper.CurrentData;
 public class P2PLogic implements ILogicServices {
 
     public String getMethod() {
-        return "p2p";
+        return "p2p_am";
     }
 
     @Override

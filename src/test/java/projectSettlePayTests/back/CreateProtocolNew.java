@@ -6,6 +6,7 @@ import projectSettlePay.BaseTest;
 import projectSettlePay.back.logics.AquairingLogic;
 import projectSettlePay.back.logics.ILogicServices;
 import projectSettlePay.back.Protocol;
+import projectSettlePay.back.logics.P2PLogic;
 import projectSettlePay.core.DataBase;
 import projectSettlePay.helper.MD5hash;
 
@@ -14,18 +15,18 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol(DataBase.DataBaseName.APIPAY_STAGE_1);
-    int protocol_id = 135;
-    String name_protocolId = "NameProtocol";
+    int protocol_id = 138;
+    String name_protocolId = "Insideex P2P";
 
 
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
-    ILogicServices servicesProtocol = new AquairingLogic();
-    int providers_id = 5165;
-    String provider_services$name = "GeoPay";
+    ILogicServices servicesProtocol = new P2PLogic();
+    int providers_id = 5167;
+    String provider_services$name = "Insideex P2P";
     String provider_services$currency = "UAH";
-    String gateway_logic = "logics.services.card_credit.v1.logic";
-    String points$name = "Точка стейдж 1";
-    String accounts$name = "Аккаунт стейдж 2";
+    String gateway_logic = "logics.services.wallet_topup_via_p2p_form.v1.logic";
+    String points$name = "Точка стейдж 8";
+    String accounts$name = "Аккаунт стейдж 8";
     boolean forMerchant = false;
     boolean pay_in = true;
 
@@ -38,7 +39,7 @@ public class CreateProtocolNew extends BaseTest {
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1058,protocol_id);
+        protocol.change_connector_protocolId(1120,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола
@@ -53,7 +54,7 @@ public class CreateProtocolNew extends BaseTest {
 
         protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true);
 
-        protocol.services(protocol_versions$path.replace("protocols.",""),gateway_logic,servicesProtocol);
+        protocol.services(protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,gateway_logic,servicesProtocol);
 
         protocol.wallet_services(protocol.getServices$id());
 

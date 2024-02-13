@@ -82,7 +82,7 @@ public class Protocol {
 
     private void insertServices(String provider_services$name, String sql) throws SQLException {
         dataApiPay.updateSql(sql);
-        res = dataApiPay.selectSql("SELECT id FROM public.services WHERE name = '"+provider_services$name+"'");
+        res = dataApiPay.selectSql("SELECT id FROM public.services WHERE name = '"+provider_services$name+"' order by id desc");
         res.next();
         services$id = res.getInt(1);
         System.out.println("Services_id = "+services$id);

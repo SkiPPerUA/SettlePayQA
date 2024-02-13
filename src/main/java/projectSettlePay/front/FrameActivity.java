@@ -17,6 +17,16 @@ abstract class FrameActivity {
         box.addText(exire.toCharArray());
     }
 
+    public void setConfirmation_amount(String amount){
+        GUITextBox box = new GUITextBox(new Locator().xpath("//input[@id=\"fields.confirmation_amount\"]"));
+        box.addText(amount.toCharArray());
+    }
+
+    public void setSender_card_number(String number){
+        GUITextBox box = new GUITextBox(new Locator().xpath("//input[@id=\"fields.sender_card_number\"]"));
+        box.addText(number.toCharArray());
+    }
+
     public void setCvv(String cvv){
         GUITextBox box = new GUITextBox(new Locator().xpath("//input[@name=\"card_cvv\"]"));
         box.addText(cvv.toCharArray());

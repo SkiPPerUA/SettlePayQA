@@ -1,5 +1,6 @@
 package projectSettlePay.back.providers;
 
+import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.helper.UuidGenerate;
 
@@ -9,7 +10,7 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
     private int conn = 4;
     private String body = "";
 
-    private IFrame frame;
+    public AcquiringFrame frame = new AcquiringFrame();
 
     public P2Pay(String body){
         this.body = body;
@@ -26,6 +27,26 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
 
     public void pay_out(){
         pay(this);
+    }
+
+    public void get_methods_list(String body){
+        this.body = body;
+        super.get_methods_list(this);
+    }
+
+    public void get_recipient_card(String body){
+        this.body = body;
+        super.get_recipient_card(this);
+    }
+
+    public void confirm(String body){
+        this.body = body;
+        super.confirm(this);
+    }
+
+    public void cancel(String body){
+        this.body = body;
+        super.cancel(this);
     }
 
     @Override
@@ -77,7 +98,11 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
                         "    \"wallet_id\": 2529,\n" +
                         "    \"service_id\": 3516,\n" +
                         "    \"amount\": 30377,\n" +
-                        "    \"amount_currency\": \"UAH\"\n" +
+                        "    \"amount_currency\": \"UAH\",\n" +
+                        "    \"fields\" : {\n" +
+                        "        \"first_name\": \"sender_name\",\n" +
+                        "        \"last_name\": \"sender_surname\"\n" +
+                        "    }"+
                         "}";
             }else {
                 return "{\n" +
