@@ -93,8 +93,8 @@ abstract class ProvidersMethods {
         if (core == 1){
             return "https://api-new.backofficeweb.info/";
         }else {
-            //return String.format("https://api-stage-%s.backofficeweb.info",core);
-            return String.format("https://gateway-api-server-stage%s.backofficeweb.info", core);
+            return String.format("https://api-stage-%s.backofficeweb.info",core);
+            //return String.format("https://gateway-api-server-stage%s.backofficeweb.info", core);
         }
     }
 }
