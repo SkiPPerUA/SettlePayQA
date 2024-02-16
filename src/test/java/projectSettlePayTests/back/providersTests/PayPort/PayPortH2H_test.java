@@ -212,7 +212,7 @@ public class PayPortH2H_test extends BaseTest {
                 "    }\n" +
                 "}";
         payPort.confirm(body);
-        System.out.println("Without first_name"+info(id));
+        System.out.println("test_create_without_first_name"+info(id));
     }
 
     public void test_create_first_name_empty() throws InterruptedException {

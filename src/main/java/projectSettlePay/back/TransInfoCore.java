@@ -14,7 +14,7 @@ public class TransInfoCore {
     private int status;
     private float amount;
 
-    public TransInfoCore(String id){
+    public TransInfoCore(long id){
         DataBase dataBase = new DataBase(APIPAY_STAGE_1);
         try {
             ResultSet result = dataBase.selectSql("SELECT x.* FROM public.transactions x WHERE id = '"+id+"'");

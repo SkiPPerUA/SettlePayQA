@@ -18,7 +18,7 @@ public class TransInfoConn {
     private int amount;
     private String transaction_uuid;
 
-    public TransInfoConn(String id){
+    public TransInfoConn(long id){
         DataBase dataBase = new DataBase(CONN_STAGE_1);
         try {
             ResultSet result = dataBase.selectSql("SELECT x.* FROM public.transactions x WHERE external_transaction_id = '"+id+"'");

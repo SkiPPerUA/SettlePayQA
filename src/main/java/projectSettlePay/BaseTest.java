@@ -1,6 +1,7 @@
 package projectSettlePay;
 
 import org.apache.log4j.Logger;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import projectSettlePay.core.DataBase;
 import java.lang.reflect.Method;
@@ -30,9 +31,16 @@ public abstract class BaseTest implements DataBase.DataBaseName{
         return dataBase;
     }
 
+    protected void closeCon(){
+        dataBase.closeConn();
+    }
+
     protected String getAgoraURL(String trans_id){
-        long id = Long.valueOf(trans_id);
-        long child = id + 1;
+        long child = Long.valueOf(trans_id) + 1;
         return "https://preprod-agora2.backofficeweb.info/transactions/transactions/"+child;
+    }
+
+    protected void showAgoraURL(String trans_id){
+        System.out.println(getAgoraURL(trans_id));
     }
 }

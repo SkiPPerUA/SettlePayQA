@@ -3,7 +3,7 @@ package projectSettlePay.back;
 import org.testng.Assert;
 import projectSettlePay.back.logics.ILogicServices;
 import projectSettlePay.core.DataBase;
-import projectSettlePay.helper.CurrentData;
+import projectSettlePay.helper.Data;
 import org.apache.log4j.Logger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public class Protocol {
             logger.info("protocol_versions$id = "+protocol_versions$id);
         }else {
             dataApiPay.updateSql("insert into public.protocol_versions(created_at, updated_at, path)\n" +
-                    "values ('"+ CurrentData.get() +"','"+CurrentData.get()+"','"+protocol_versions$path+"')");
+                    "values ('"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"','"+protocol_versions$path+"')");
             res = dataApiPay.selectSql("SELECT x.id FROM public.protocol_versions x\n" +
                     "WHERE \"path\" = '"+protocol_versions$path+"'");
             res.next();
@@ -63,7 +63,7 @@ public class Protocol {
 
     public void provider_services(int provider_id, String provider_services$name, String provider_services$currency, boolean currency_required) throws SQLException {
         dataApiPay.updateSql("insert into public.provider_services(created_at, updated_at, provider_id, name, currency, currency_required, is_moto)\n" +
-                "values ('"+ CurrentData.get() +"','"+CurrentData.get()+"',"+provider_id+", '"+provider_services$name+"', '"+provider_services$currency+"', "+currency_required+", false)");
+                "values ('"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"',"+provider_id+", '"+provider_services$name+"', '"+provider_services$currency+"', "+currency_required+", false)");
 
         res = dataApiPay.selectSql("SELECT id FROM public.provider_services WHERE name = '"+provider_services$name+"'");
         res.next();
@@ -92,6 +92,7 @@ public class Protocol {
         res = dataApiPay.selectSql("SELECT x.id FROM public.payment_method_types x where slug = '"+method+"'");
         if (res.next()){
             method_type = res.getInt(1);
+            logger.info("method_type "+method_type);
         }else {
             Assert.fail(method + " не найден");
         }
@@ -101,8 +102,9 @@ public class Protocol {
         res = dataApiPay.selectSql("SELECT x.id FROM public.service_logics x WHERE \"path\" = '"+gateway_logic+"'");
         if (res.next()) {
             sandbox_logic_id = res.getInt(1);
+            logger.info("sandbox_logic_id "+sandbox_logic_id);
         }else {
-            dataApiPay.updateSql("insert into public.service_logics(created_at, updated_at,name,path) values ('"+ CurrentData.get() +"','"+CurrentData.get()+"',"+gateway_logic+","+gateway_logic+")");
+            dataApiPay.updateSql("insert into public.service_logics(created_at, updated_at,name,path) values ('"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"',"+gateway_logic+","+gateway_logic+")");
             find_sandbox_logic_id(gateway_logic);
         }
     }
@@ -198,7 +200,7 @@ public class Protocol {
             logger.info("connector_Id = "+connector_Id);
         }else {
             dataConn.updateSql("insert into public.providers(created_at, updated_at, is_active, protocol_id, gateway_id, name)\n" +
-                    "values ('"+ CurrentData.get() +"','"+CurrentData.get()+"',true,"+protocol_id+","+protocol_id+",'"+name+"')");
+                    "values ('"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"',true,"+protocol_id+","+protocol_id+",'"+name+"')");
             connector_protocolId(protocol_id,name);
         }
     }

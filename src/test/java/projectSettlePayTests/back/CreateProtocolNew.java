@@ -15,18 +15,18 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol(DataBase.DataBaseName.APIPAY_STAGE_1);
-    int protocol_id = 138;
-    String name_protocolId = "Insideex P2P";
+    int protocol_id = 142;
+    String name_protocolId = "AstroPay_payin";
 
 
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
     ILogicServices servicesProtocol = new P2PLogic();
-    int providers_id = 5167;
-    String provider_services$name = "Insideex P2P";
+    int providers_id = 5179;
+    String provider_services$name = "AstroPay_payin";
     String provider_services$currency = "UAH";
-    String gateway_logic = "logics.services.wallet_topup_via_p2p_form.v1.logic";
-    String points$name = "Точка стейдж 8";
-    String accounts$name = "Аккаунт стейдж 8";
+    String gateway_logic = "logics.services.wallet_topup_via_provider_form.v1.logic";
+    String points$name = "Точка стейдж 7";
+    String accounts$name = "Аккаунт стейдж 7";
     boolean forMerchant = false;
     boolean pay_in = true;
 
@@ -39,20 +39,20 @@ public class CreateProtocolNew extends BaseTest {
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1120,protocol_id);
+        protocol.change_connector_protocolId(1201,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола
         protocol.protocol_id(protocol_versions$path);
         makeConnector();
-        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.",""),protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
+        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
     }
 
     //добавить запись в providers - сказать имя+protocol_id из protocol_versions + ссылку на стейдж Коннектора + id из providersКонектора = получаю providers ид
 
     public void makeApiPay() throws SQLException {
 
-        protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true);
+        protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true); // date добавить
 
         protocol.services(protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,gateway_logic,servicesProtocol);
 

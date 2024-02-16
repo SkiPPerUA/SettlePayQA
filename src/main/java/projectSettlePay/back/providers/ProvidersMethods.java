@@ -13,7 +13,7 @@ abstract class ProvidersMethods {
     void create(IProviders provider){
         logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/create";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -23,9 +23,8 @@ abstract class ProvidersMethods {
     }
 
     void get_methods_list(IProviders provider){
-        logerName(provider);
-        String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/get-methods-list";
-        logger.info("URL - "+urlRequest);
+        String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/getCurrentTime-methods-list";
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -35,9 +34,8 @@ abstract class ProvidersMethods {
     }
 
     void confirm(IProviders provider){
-        logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/confirm";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -47,9 +45,8 @@ abstract class ProvidersMethods {
     }
 
     void cancel(IProviders provider){
-        logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/cancel";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -59,9 +56,8 @@ abstract class ProvidersMethods {
     }
 
     void get_recipient_card(IProviders provider){
-        logerName(provider);
-        String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/get-recipient-card";
-        logger.info("URL - "+urlRequest);
+        String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/getCurrentTime-recipient-card";
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -93,8 +89,8 @@ abstract class ProvidersMethods {
         if (core == 1){
             return "https://api-new.backofficeweb.info/";
         }else {
-            return String.format("https://api-stage-%s.backofficeweb.info",core);
-            //return String.format("https://gateway-api-server-stage%s.backofficeweb.info", core);
+            //return String.format("https://api-stage-%s.backofficeweb.info",core);
+            return String.format("https://gateway-api-server-stage%s.backofficeweb.info", core);
         }
     }
 }
