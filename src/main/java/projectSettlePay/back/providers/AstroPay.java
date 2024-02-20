@@ -67,7 +67,7 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
-                        "    \"external_order_id\": \"1234567890\",\n" +
+                        "    \"external_order_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
                         "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2765,\n" +
