@@ -32,7 +32,9 @@ public abstract class BaseTest implements DataBase.DataBaseName{
     }
 
     protected void closeCon(){
-        dataBase.closeConn();
+        if (dataBase != null) {
+            dataBase.closeConn();
+        };
     }
 
     protected String getAgoraURL(String trans_id){

@@ -1,6 +1,8 @@
 package projectSettlePay.back.providers;
 
+import projectSettlePay.front.AstroPayFrame;
 import projectSettlePay.front.IFrame;
+import projectSettlePay.helper.UuidGenerate;
 
 public class AstroPay extends ProvidersMethods implements Pay_in {
 
@@ -8,7 +10,7 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
     private int conn = 7;
     private String body = "";
 
-    private IFrame frame;
+    public IFrame frame = new AstroPayFrame();
 
     public AstroPay(String body){
         this.body = body;
@@ -60,24 +62,27 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                 return "{\n" +
                         "    \"auth\": {\n" +
                         "        \"debug\": true,\n" +
-                        "        \"point\": 1,\n" +
+                        "        \"point\": 2759,\n" +
                         "        \"key\": 1,\n" +
-                        "        \"hash\": \"c9194644d4316e008a7afb0d50bf056b\"\n" +
+                        "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
-                        "    \"external_order_id\": \"100\",\n" +
-                        "    \"external_customer_id\": \"437651278052846769\",\n" +
+                        "    \"external_order_id\": \"1234567890\",\n" +
+                        "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"account_id\": 4,\n" +
-                        "    \"wallet_id\": 10,\n" +
-                        "    \"service_id\": 3075,\n" +
-                        "    \"amount\": 10000,\n" +
-                        "    \"description\" : \"test roman crypto\",\n" +
-                        "    \"amount_currency\": \"UAH\" ,\n" +
-                        "    \"point\" : {\n" +
-                        "        \"success_url\" : \"https://google.com\"\n" +
-                        "    }\n" +
-                        "}";
+                        "    \"account_id\": 2765,\n" +
+                        "    \"wallet_id\": 3554,\n" +
+                        "    \"service_id\": 4217,\n" +
+                        "    \"amount\": 1000,\n" +
+                        "    \"amount_currency\": \"USD\",\n" +
+                        "    \"fields\": {\n" +
+                        "        \"country\": \"BR\"\n" +
+                        "    },\n" +
+                        "    \"point\": {\n" +
+                        "        \"redirect_url\": \"https://www.google.com/\"\n" +
+                        "    },\n" +
+                        "    \"description\": \"Test deposit\"\n" +
+                        "    }";
         }
     }
 

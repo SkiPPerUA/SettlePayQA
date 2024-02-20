@@ -10,7 +10,7 @@ abstract public class Widget {
     protected static Logger logger = Logger.getLogger(Widget.class);
     protected Locator widgetLocator;
     protected WebElement element;
-    protected WebElement getElement(){
+    public WebElement getElement(){
         if(element == null){
             try {
                 element = Session.getDriverWait().until(ExpectedConditions.visibilityOfElementLocated(widgetLocator.getLocator()));
