@@ -14,17 +14,16 @@ import java.sql.SQLException;
 
 @Test
 public class CreateProtocolNew extends BaseTest {
-    Protocol protocol = new Protocol(DataBase.DataBaseName.APIPAY_STAGE_1);
-    int protocol_id = 142;
-    String name_protocolId = "AstroPay_payin";
+    Protocol protocol = new Protocol();
+    int protocol_id = 144;
+    String provider_services$name = "AstroPay_payin_pix";
 
 
-    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
-    ILogicServices servicesProtocol = new P2PLogic();
-    int providers_id = 5179;
-    String provider_services$name = "AstroPay_payin";
-    String provider_services$currency = "UAH";
-    String gateway_logic = "logics.services.wallet_topup_via_provider_form.v1.logic";
+    String protocol_versions$path = "protocols.v2.ProviderConnector.v1.protocol_pix_acquiring";
+    ILogicServices servicesProtocol = new AquairingLogic();
+    int providers_id = 5181;
+    String provider_services$currency = "BRL";
+    String gateway_logic = "logics.services.v2.wallet_topup_via_transfero_qr_code.v1.logic";
     String points$name = "Точка стейдж 7";
     String accounts$name = "Аккаунт стейдж 7";
     boolean forMerchant = false;
@@ -32,14 +31,14 @@ public class CreateProtocolNew extends BaseTest {
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
-        protocol.connector_protocolId(protocol_id,name_protocolId);
+        protocol.connector_protocolId(protocol_id,provider_services$name);
     }
 
     // добавить креды в provider_credentials - получаю ид
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1201,protocol_id);
+        protocol.change_connector_protocolId(1206,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола

@@ -16,6 +16,13 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
         this.body = body;
     }
 
+    public AstroPay(String body, boolean pix){
+        this.body = body;
+        if (pix) {
+            conn = 4;
+        }
+    }
+
     public void pay_in(){
         create(this);
     }
@@ -58,7 +65,8 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
     }
 
     public static class AstroPayBody{
-        public static String defaultBody(){
+        public static String defaultBody(String method) {
+            if (method.equals("pix")) {
                 return "{\n" +
                         "    \"auth\": {\n" +
                         "        \"debug\": true,\n" +
@@ -67,8 +75,38 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
-                        "    \"external_order_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
-                        "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                        "    \"external_order_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                        "    \"account_id\": 2765,\n" +
+                        "    \"wallet_id\": 3015,\n" +
+                        "    \"service_id\": 4221,\n" +
+                        "    \"amount\": 1000,\n" +
+                        "    \"amount_currency\": \"BRL\",\n" +
+                        "    \"fields\": {\n" +
+                        "        \"country\": \"BR\",\n" +
+                        "        \"email\":\"cadfa@fdas.das\",\n" +
+                        "        \"phone\":\"34234242323\",\n" +
+                        "        \"itn\":\"12345678909\",\n" +
+                        "        \"first_name\":\"name\",\n" +
+                        "        \"last_name\":\"last\"\n" +
+                        "    },\n" +
+                        "    \"point\": {\n" +
+                        "        \"redirect_url\": \"https://www.google.com/\"\n" +
+                        "    },\n" +
+                        "    \"description\": \"Test deposit\"\n" +
+                        "    }";
+            } else {
+                return "{\n" +
+                        "    \"auth\": {\n" +
+                        "        \"debug\": true,\n" +
+                        "        \"point\": 2759,\n" +
+                        "        \"key\": 1,\n" +
+                        "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
+                        "    },\n" +
+                        "    \"locale\": \"ua\",\n" +
+                        "    \"external_order_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                        "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2765,\n" +
                         "    \"wallet_id\": 3554,\n" +
@@ -83,6 +121,7 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "    },\n" +
                         "    \"description\": \"Test deposit\"\n" +
                         "    }";
+            }
         }
     }
 

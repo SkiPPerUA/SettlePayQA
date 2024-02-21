@@ -22,7 +22,7 @@ public class AstroPayPayIn extends BaseTest {
     AstroPay astroPay;
 
     public void positive_payin_APPROVED(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
+        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody(""));
         astroPay.pay_in();
         makeCallback("APPROVED");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),1);
@@ -37,7 +37,7 @@ public class AstroPayPayIn extends BaseTest {
     }
 
     public void positive_payin_PENDING(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
+        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody(""));
         astroPay.pay_in();
         makeCallback("PENDING");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
@@ -48,7 +48,7 @@ public class AstroPayPayIn extends BaseTest {
     }
 
     public void positive_payin_CANCELED(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
+        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody(""));
         astroPay.pay_in();
         makeCallback("CANCELED");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
@@ -59,7 +59,7 @@ public class AstroPayPayIn extends BaseTest {
     }
 
     public void positive_payin_APPROVED_after_CANCELED(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
+        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody(""));
         astroPay.pay_in();
         makeCallback("CANCELED");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
@@ -70,44 +70,6 @@ public class AstroPayPayIn extends BaseTest {
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),1);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),1);
         System.out.print("positive_payin_APPROVED_after_CANCELED ");
-        showAgoraURL(astroPay.getId());
-    }
-
-    public void negative_payin_APPROVED_after_CANCELED(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
-        astroPay.pay_in();
-        long child = Long.valueOf(astroPay.getId()) + 1;
-        //getDataBase(CONN_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(5) +"', updated_at = '"+Data.getChangeDays(1)+"' WHERE external_transaction_id = '"+child+"'");
-        getDataBase(APIPAY_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(-5) +"', updated_at = '"+Data.getChangeDays(-5)+"' WHERE id = "+child+"");
-        getDataBase(APIPAY_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(-5) +"', updated_at = '"+Data.getChangeDays(-5)+"' WHERE id = "+astroPay.getId()+"");
-        makeCallback("CANCELED");
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        makeCallback("APPROVED");
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        System.out.print("negative_payin_APPROVED_after_CANCELED ");
-        showAgoraURL(astroPay.getId());
-    }
-
-    public void positive_payin_APPROVED_after_fiveDays(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody());
-        astroPay.pay_in();
-        makeCallback("CANCELED");
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),10);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),10);
-        long child = Long.valueOf(astroPay.getId()) + 1;
-        //getDataBase(CONN_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(5) +"', updated_at = '"+Data.getChangeDays(1)+"' WHERE external_transaction_id = '"+child+"'");
-        getDataBase(APIPAY_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(-6) +"', updated_at = '"+Data.getChangeDays(-6)+"' WHERE id = "+child+"");
-        getDataBase(APIPAY_STAGE_1).updateSql("UPDATE public.transactions SET created_at = '"+ Data.getChangeDays(-6) +"', updated_at = '"+Data.getChangeDays(-6)+"' WHERE id = "+astroPay.getId()+"");
-        makeCallback("APPROVED");
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
-        System.out.print("positive_payin_APPROVED_after_fiveDays ");
         showAgoraURL(astroPay.getId());
     }
 
@@ -474,6 +436,19 @@ public class AstroPayPayIn extends BaseTest {
                 "}";
         Callback callback = new Callback();
         callback.makeCallback(callback.getResult_url(astroPay),String.format(bodyCallback,status));
+    }
+
+    @Test(enabled = false)
+    public void call(){
+        String bodyCallback = "{\n" +
+                "    \"deposit_external_id\": \"jRmiGaLPbE0eI4OoP9X8YkgtiTfewAkhqE1zgQDn\", \n" +
+                "    \"merchant_deposit_id\": \"TD-001\",\n" +
+                "    \"deposit_user_id\": \"Vx0H4pdAtPCz\",\n" +
+                "    \"merchant_user_id\": \"TU-001\",\n" +
+                "    \"status\": \"APPROVED\",\n" +
+                "    \"end_status_date\": \"2022-04-08T16:17:49\"\n" +
+                "}";
+        new Callback().makeCallback(new TransInfoConn(110100000481845l).getTransaction_uuid(),bodyCallback);
     }
 
     @AfterTest

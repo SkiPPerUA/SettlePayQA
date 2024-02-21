@@ -16,13 +16,4 @@ public interface IProviders {
 
      String getId();
 
-     static List<Pay_in> getAllPayIn(){
-          return List.of(new OnePay(OnePay.OnePayBody.defaultBody(true)));
-     }
-
-     static List<Pay_out> getAllPayOut(){
-          return List.of(new OnePay(OnePay.OnePayBody.defaultBody(false)),
-                  new MoneyGram(MoneyGram.MoneyGramBody.defaultBody()));
-     }
-
 }

@@ -8,7 +8,7 @@ public class Paycord extends ProvidersMethods implements Pay_in, Pay_out {
     private int conn = 6;
     private String body = "";
 
-    private IFrame frame;
+    public IFrame frame;
 
     public Paycord(String body){
         this.body = body;
