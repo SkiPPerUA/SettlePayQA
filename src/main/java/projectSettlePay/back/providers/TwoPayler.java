@@ -32,6 +32,26 @@ public class TwoPayler extends ProvidersMethods implements Pay_out, Pay_in {
         return core;
     }
 
+    public void get_methods_list(String body){
+        this.body = body;
+        super.get_methods_list(this);
+    }
+
+    public void get_recipient_card(String body){
+        this.body = body;
+        super.get_recipient_card(this);
+    }
+
+    public void confirm(String body){
+        this.body = body;
+        super.confirm(this);
+    }
+
+    public void cancel(String body){
+        this.body = body;
+        super.cancel(this);
+    }
+
     @Override
     public void setCore(int core){
         this.core = core;

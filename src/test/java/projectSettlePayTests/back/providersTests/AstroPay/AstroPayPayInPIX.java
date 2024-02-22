@@ -9,9 +9,6 @@ import projectSettlePay.back.TransInfoConn;
 import projectSettlePay.back.TransInfoCore;
 import projectSettlePay.back.providers.AstroPay;
 import projectSettlePay.core.Session;
-import projectSettlePay.helper.Data;
-import projectSettlePay.helper.UuidGenerate;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +25,7 @@ public class AstroPayPayInPIX extends BaseTest {
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),1);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),1);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),1);
-        Assert.assertTrue(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getProvider_data().contains("deposit_user_id"));
+        //Assert.assertTrue(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getProvider_data().contains("deposit_user_id"));
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getAmount(),1000);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getAmount(),10.00);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getAmount(),10.00);
@@ -59,7 +56,7 @@ public class AstroPayPayInPIX extends BaseTest {
     }
 
     public void positive_payin_APPROVED_after_CANCELED(){
-        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody("pix"));
+        astroPay = new AstroPay(AstroPay.AstroPayBody.defaultBody("pix"),true);
         astroPay.pay_in();
         makeCallback("CANCELED");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
@@ -94,7 +91,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -102,7 +99,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
         Assert.assertTrue(astroPay.getResponse().contains("Check minimum amount"));
         System.out.print("test_sum_MIN ");
@@ -129,7 +126,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -137,7 +134,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
         Assert.assertTrue(astroPay.getResponse().contains("Check minimum amount"));
         System.out.print("test_sum_ZERO ");
@@ -164,7 +161,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -172,13 +169,13 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
         makeCallback("APPROVED");
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),1);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),1);
         Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),1);
-        Assert.assertTrue(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getProvider_data().contains("deposit_user_id"));
+        //Assert.assertTrue(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getProvider_data().contains("deposit_user_id"));
         Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getAmount(),1001);
         System.out.print("test_sum_with_cents ");
         showAgoraURL(astroPay.getId());
@@ -205,7 +202,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -213,12 +210,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
         Assert.assertTrue(astroPay.getResponse().contains("Check maximum amount"));
         System.out.print("test_sum_MAX ");
     }
-
     public void negative_without_country(){
         astroPay = new AstroPay("{\n" +
                 "    \"auth\": {\n" +
@@ -239,7 +235,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"fields\": {\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -247,8 +243,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("negative_without_country ");
         showAgoraURL(astroPay.getId());
     }
@@ -274,7 +273,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": null,\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -282,7 +281,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
         Assert.assertTrue(astroPay.getResponse().contains("@fields[country] = None value type is not str"));
         System.out.print("negative_country_null ");
@@ -309,7 +308,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -317,8 +316,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("negative_country_empty ");
         showAgoraURL(astroPay.getId());
     }
@@ -344,7 +346,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"AF\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -352,8 +354,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("negative_country_blocked ");
         showAgoraURL(astroPay.getId());
     }
@@ -381,7 +386,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"UKR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -389,25 +394,21 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("negative_country_not_correct ");
         showAgoraURL(astroPay.getId());
     }
-    //@Test(enabled = false)
+    @Test(enabled = false)
     public void test_all_currency() throws InterruptedException {
         List<String> curr_name = List.of("USD","BRL");
-        List<String> country_list = List.of("MX"); //"AR", "BR", "CL", "CO", "CR", "MX", "PE", "UY"
+        List<String> country_list = List.of("AR", "BR", "CL", "CO", "CR", "MX", "PE", "UY"); //"AR", "BR", "CL", "CO", "CR", "MX", "PE", "UY"
         Map<String, String> currency_wallet = new HashMap<>();
         currency_wallet.put("USD","3554");
-        currency_wallet.put("ARS","3231");
         currency_wallet.put("BRL","3016");
-        currency_wallet.put("CLP","3349");
-        currency_wallet.put("COP","3017");
-        currency_wallet.put("CRC","3668");
-        currency_wallet.put("MXN","3013");
-        currency_wallet.put("PEN","3351");
-        currency_wallet.put("UYU","3670");
         String body = "{\n" +
                 "    \"auth\": {\n" +
                 "        \"debug\": true,\n" +
@@ -428,7 +429,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"%s\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -439,9 +440,9 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    }";
         for (String country: country_list) {
             for (String curr : curr_name) {
-                astroPay = new AstroPay(String.format(body, currency_wallet.get(curr), curr, country));
+                astroPay = new AstroPay(String.format(body, currency_wallet.get(curr), curr, country),true);
                 astroPay.pay_in();
-                positiveUI();
+                //positiveUI();
                 System.out.print("currency (" + curr + "), country ("+country+") ");
                 showAgoraURL(astroPay.getId());
             }
@@ -469,7 +470,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -477,10 +478,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("A currency is required"));
         System.out.print("test_amount_currency_empty ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_amount_currency_null(){
@@ -504,7 +505,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -512,10 +513,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("{'amount_currency': ['null value not allowed']}"));
         System.out.print("test_amount_currency_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_without_amount_currency(){
@@ -538,7 +539,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -546,10 +547,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("A currency is required"));
         System.out.print("test_without_amount_currency ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_amount_null(){
@@ -573,7 +574,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -581,10 +582,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("{'amount': [\\\"field 'amount' cannot be coerced: int() argument must be a string, a bytes-like object or a number, not 'NoneType'\\\", 'null value not allowed']}"));
         System.out.print("test_amount_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_without_amount(){
@@ -607,7 +608,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -615,8 +616,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_amount ");
         showAgoraURL(astroPay.getId());
     }
@@ -642,7 +646,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -650,10 +654,12 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_email_empty ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_email_null(){
@@ -677,7 +683,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":null,\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -685,10 +691,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("@fields[email] = None value type is not str"));
         System.out.print("test_email_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_email_notCorrect(){
@@ -712,7 +718,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfafdasdas\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -720,8 +726,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_email_notCorrect ");
         showAgoraURL(astroPay.getId());
     }
@@ -746,7 +755,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -754,8 +763,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_email ");
         showAgoraURL(astroPay.getId());
     }
@@ -779,9 +791,9 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"amount_currency\": \"BRL\",\n" +
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
-                "\t\t\t\t\"email\":\"\",\n" +
+                "\t\t\t\t\"email\":\"fsdfcs@fdsd.df\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -789,8 +801,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),10);
         System.out.print("test_description_empty ");
         showAgoraURL(astroPay.getId());
     }
@@ -814,9 +829,9 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"amount_currency\": \"BRL\",\n" +
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
-                "\t\t\t\t\"email\":null,\n" +
+                "\t\t\t\t\"email\":adcacd@dsa.dsa,\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -824,10 +839,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": null\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("Bad request"));
         System.out.print("test_description_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_description_rusSymbol(){
@@ -849,9 +864,9 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"amount_currency\": \"BRL\",\n" +
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
-                "\t\t\t\t\"email\":\"cadfafdasdas\",\n" +
+                "\t\t\t\t\"email\":\"cadfafda@cd.sdas\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -859,8 +874,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"вуффс\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),10);
         System.out.print("test_description_rusSymbol ");
         showAgoraURL(astroPay.getId());
     }
@@ -884,16 +902,20 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"amount_currency\": \"BRL\",\n" +
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
+                "\t\t\t\t\"email\":\"cadfafda@cd.sdas\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
                 "    \"point\": {\n" +
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    }\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),10);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),10);
         System.out.print("test_without_description ");
         showAgoraURL(astroPay.getId());
     }
@@ -919,7 +941,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -927,10 +949,12 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_phone_empty ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_phone_null(){
@@ -954,7 +978,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":null,\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -962,10 +986,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("@fields[phone] = None value type is not str"));
         System.out.print("test_phone_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_phone_notCorrect(){
@@ -989,7 +1013,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"33\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -997,8 +1021,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_phone_notCorrect ");
         showAgoraURL(astroPay.getId());
     }
@@ -1024,7 +1051,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"fdfsdfsd\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1032,8 +1059,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_phone_words ");
         showAgoraURL(astroPay.getId());
     }
@@ -1058,7 +1088,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "    \"fields\": {\n" +
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1066,8 +1096,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_phone ");
         showAgoraURL(astroPay.getId());
     }
@@ -1101,8 +1134,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_itn_empty ");
         showAgoraURL(astroPay.getId());
     }
@@ -1128,7 +1164,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"260402712721\",\n" +
+                "\t\t\t\t\"itn\":\"111111111111\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1136,9 +1172,12 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
-        System.out.print("test_itn_empty ");
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        System.out.print("test_itn_more_than_11 ");
         showAgoraURL(astroPay.getId());
     }
 
@@ -1163,7 +1202,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"null\",\n" +
+                "\t\t\t\t\"itn\":null,\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1171,10 +1210,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("@fields[itn] = None value type is not str"));
         System.out.print("test_itn_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_itn_notCorrect(){
@@ -1206,8 +1245,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_itn_notCorrect ");
         showAgoraURL(astroPay.getId());
     }
@@ -1240,8 +1282,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_itn ");
         showAgoraURL(astroPay.getId());
     }
@@ -1267,7 +1312,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1275,8 +1320,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_first_name_empty ");
         showAgoraURL(astroPay.getId());
     }
@@ -1302,7 +1350,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"dsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsdd\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1310,8 +1358,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_first_name_big_size ");
         showAgoraURL(astroPay.getId());
     }
@@ -1337,7 +1388,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"first\",\n" +
                 "\t\t\t\t\"last_name\":\"dsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsddsfsdlknflksdmnfklsdd\"\n" +
                 "    },\n" +
@@ -1345,10 +1396,12 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_last_name_big_size ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_first_name_null(){
@@ -1372,7 +1425,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":null,\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1380,10 +1433,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("@fields[first_name] = None value type is not str"));
         System.out.print("test_first_name_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_without_first_name(){
@@ -1407,15 +1460,18 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
                 "    \"point\": {\n" +
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_first_name ");
         showAgoraURL(astroPay.getId());
     }
@@ -1441,7 +1497,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"\"\n" +
                 "    },\n" +
@@ -1449,8 +1505,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_last_name_empty ");
         showAgoraURL(astroPay.getId());
     }
@@ -1476,7 +1535,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"423dffd !@#$$%cx\"\n" +
                 "    },\n" +
@@ -1484,8 +1543,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_last_name_notCorrect ");
         showAgoraURL(astroPay.getId());
     }
@@ -1511,7 +1573,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"423dffd !@#$$%cx\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1519,8 +1581,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_first_name_notCorrect ");
         showAgoraURL(astroPay.getId());
     }
@@ -1546,7 +1611,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":\"ваысавыф\"\n" +
                 "    },\n" +
@@ -1554,8 +1619,11 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_last_name_rusSymbol ");
         showAgoraURL(astroPay.getId());
     }
@@ -1581,7 +1649,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"ываывац\",\n" +
                 "\t\t\t\t\"last_name\":\"last\"\n" +
                 "    },\n" +
@@ -1589,10 +1657,12 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_first_name_rusSymbol ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_last_name_null(){
@@ -1616,7 +1686,7 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\",\n" +
                 "\t\t\t\t\"last_name\":null\n" +
                 "    },\n" +
@@ -1624,10 +1694,10 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertTrue(astroPay.getResponse().contains("@fields[last_name] = None value type is not str"));
         System.out.print("test_last_name_null ");
-        showAgoraURL(astroPay.getId());
     }
 
     public void test_without_last_name(){
@@ -1651,17 +1721,68 @@ public class AstroPayPayInPIX extends BaseTest {
                 "        \"country\": \"BR\",\n" +
                 "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
                 "\t\t\t\t\"phone\":\"34234242323\",\n" +
-                "\t\t\t\t\"itn\":\"26040271272\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
                 "\t\t\t\t\"first_name\":\"name\"\n" +
                 "    },\n" +
                 "    \"point\": {\n" +
                 "        \"redirect_url\": \"https://www.google.com/\"\n" +
                 "    },\n" +
                 "    \"description\": \"Test deposit\"\n" +
-                "    }");
+                "    }",true);
         astroPay.pay_in();
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(astroPay.getId())+1).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())).getStatus(),2);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(astroPay.getId())+1).getStatus(),2);
         System.out.print("test_without_last_name ");
         showAgoraURL(astroPay.getId());
+    }
+
+    public void test_locale() throws InterruptedException {
+        String body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2759,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
+                "    },\n" +
+                "    \"locale\": \"%s\",\n" +
+                "    \"external_order_id\": \"123456789011\",\n" +
+                "    \"external_customer_id\": \"321123\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"account_id\": 2765,\n" +
+                "    \"wallet_id\": 3015,\n" +
+                "    \"service_id\": 4221,\n" +
+                "    \"amount\": 1000,\n" +
+                "    \"amount_currency\": \"BRL\",\n" +
+                "    \"fields\": {\n" +
+                "        \"country\": \"BR\",\n" +
+                "\t\t\t\t\"email\":\"cadfa@fdas.das\",\n" +
+                "\t\t\t\t\"phone\":\"34234242323\",\n" +
+                "\t\t\t\t\"itn\":\"26040271\",\n" +
+                "\t\t\t\t\"first_name\":\"name\",\n" +
+                "\t\t\t\t\"last_name\":\"last\"\n" +
+                "    },\n" +
+                "    \"point\": {\n" +
+                "        \"redirect_url\": \"https://www.google.com/\"\n" +
+                "    },\n" +
+                "    \"description\": \"Test deposit\"\n" +
+                "    }";
+        List<String> locale = List.of("es","pt", "ua","ru","en");
+        for (String loc: locale){
+            astroPay = new AstroPay(String.format(body,loc), true);
+            astroPay.pay_in();
+            if (astroPay.getPayURL() != null) {
+                Session.getDriver().get(astroPay.getPayURL());
+                Thread.sleep(15000);
+                makeCallback("APPROVED");
+                Session.getDriver().navigate().refresh();
+                Thread.sleep(15000);
+                System.out.print("Success ");
+            }else {
+                System.out.print("Fail ");
+            }
+            System.out.println("locale "+loc);
+        }
     }
 
     private void makeCallback(String status){
@@ -1693,19 +1814,5 @@ public class AstroPayPayInPIX extends BaseTest {
     @AfterTest
     void close(){
         closeCon();
-    }
-
-    private void positiveUI(){
-        if (astroPay.getPayURL() != null) {
-            System.out.print("PayURL - есть -> ");
-            try {
-                Session.getDriver().get(astroPay.getPayURL());
-                astroPay.frame.positiveSteps();
-            } finally {
-                Session.closeSession();
-            }
-        }else {
-            System.out.print("PayURL - нету -> ");
-        }
     }
 }

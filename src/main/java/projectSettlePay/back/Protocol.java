@@ -34,6 +34,14 @@ public class Protocol {
         dataConn = new DataBase(DataBase.DataBaseName.CONN_STAGE_1);
     }
 
+    public void add_schema(String schema, String name) throws SQLException {
+        dataConn.updateSql("insert into public.provider_credentials_templates(credentials_scheme,created_at, updated_at,\"name\") " +
+                "values('"+schema+"', '"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"', '"+name+"')");
+        res = dataConn.selectSql("SELECT x.* FROM public.provider_credentials_templates x WHERE \"name\" = '"+name+"' order by id desc");
+        res.next();
+        System.out.println("schema id = "+res.getInt("id"));
+    }
+
     public void protocol_id(String protocol_versions$path) throws SQLException {
         res = dataApiPay.selectSql("SELECT x.protocol_id FROM public.protocol_versions x\n" +
                 "WHERE \"path\" = '"+protocol_versions$path+"' order by protocol_id ASC");

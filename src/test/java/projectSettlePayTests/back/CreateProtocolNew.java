@@ -17,6 +17,7 @@ public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
     int protocol_id = 144;
     String provider_services$name = "AstroPay_payin_pix";
+    String schema = "";
 
 
     String protocol_versions$path = "protocols.v2.ProviderConnector.v1.protocol_pix_acquiring";
@@ -33,8 +34,11 @@ public class CreateProtocolNew extends BaseTest {
         // добавить протокол ид из МД файла в public.providers x (конектор)
         protocol.connector_protocolId(protocol_id,provider_services$name);
     }
-
     // добавить креды в provider_credentials - получаю ид
+
+    public void insert_schema() throws SQLException {
+        protocol.add_schema(schema,provider_services$name);
+    }
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)

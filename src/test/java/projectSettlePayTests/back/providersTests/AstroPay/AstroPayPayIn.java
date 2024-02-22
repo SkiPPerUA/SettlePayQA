@@ -438,7 +438,7 @@ public class AstroPayPayIn extends BaseTest {
         callback.makeCallback(callback.getResult_url(astroPay),String.format(bodyCallback,status));
     }
 
-    @Test(enabled = false)
+    //@Test(enabled = false)
     public void call(){
         String bodyCallback = "{\n" +
                 "    \"deposit_external_id\": \"jRmiGaLPbE0eI4OoP9X8YkgtiTfewAkhqE1zgQDn\", \n" +
@@ -448,7 +448,8 @@ public class AstroPayPayIn extends BaseTest {
                 "    \"status\": \"APPROVED\",\n" +
                 "    \"end_status_date\": \"2022-04-08T16:17:49\"\n" +
                 "}";
-        new Callback().makeCallback(new TransInfoConn(110100000481845l).getTransaction_uuid(),bodyCallback);
+        Callback callback = new Callback();
+        callback.makeCallback(callback.getResult_url(astroPay),bodyCallback);
     }
 
     @AfterTest

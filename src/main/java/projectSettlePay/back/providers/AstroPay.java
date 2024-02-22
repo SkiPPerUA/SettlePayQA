@@ -87,7 +87,7 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "        \"country\": \"BR\",\n" +
                         "        \"email\":\"cadfa@fdas.das\",\n" +
                         "        \"phone\":\"34234242323\",\n" +
-                        "        \"itn\":\"12345678909\",\n" +
+                        "        \"itn\":\"26040271\",\n" +
                         "        \"first_name\":\"name\",\n" +
                         "        \"last_name\":\"last\"\n" +
                         "    },\n" +
