@@ -1,6 +1,7 @@
 package projectSettlePay.back;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.apache.log4j.Logger;
 import projectSettlePay.back.providers.IProviders;
 import projectSettlePay.core.DataBase;
@@ -13,6 +14,7 @@ public class Callback {
 
     private static Logger logger = Logger.getLogger(Callback.class);
     private DataBase dataBase;
+    private Response response;
 
     public String getResult_url(IProviders provider){
         String result_url = "";
@@ -31,10 +33,15 @@ public class Callback {
     }
 
     public void makeCallback(String url, String body){
-        given()
+        response = given()
                 .contentType(ContentType.JSON)
                 .body(body)
                 .when()
                 .post(url);
+        logger.info("Callback - "+getResponse());
+    }
+
+    public String getResponse(){
+        return response.then().extract().response().asString();
     }
 }

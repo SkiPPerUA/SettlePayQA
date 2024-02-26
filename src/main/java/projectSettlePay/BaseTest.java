@@ -43,6 +43,6 @@ public abstract class BaseTest implements DataBase.DataBaseName{
     }
 
     protected void showAgoraURL(String trans_id){
-        System.out.println(getAgoraURL(trans_id));
+        System.out.println(Thread.currentThread().getStackTrace()[2].getMethodName()+" --> "+getAgoraURL(trans_id));
     }
 }

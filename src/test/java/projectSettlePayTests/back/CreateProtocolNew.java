@@ -4,6 +4,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
 import projectSettlePay.back.logics.AquairingLogic;
+import projectSettlePay.back.logics.H2HLogic;
 import projectSettlePay.back.logics.ILogicServices;
 import projectSettlePay.back.Protocol;
 import projectSettlePay.back.logics.P2PLogic;
@@ -15,20 +16,66 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
-    int protocol_id = 144;
-    String provider_services$name = "AstroPay_payin_pix";
-    String schema = "";
+    int protocol_id = 145;
+    String provider_services$name = "Munzen_payout";
+    String schema = "{\n" +
+            "    \"schema\": [\n" +
+            "        {\n" +
+            "            \"label\": \"Base Url\",\n" +
+            "            \"name\": \"base_url\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"text\",\n" +
+            "            \"placeholder\": \"https://...\",\n" +
+            "            \"value\": \"\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Control key\",\n" +
+            "            \"name\": \"control_key\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"text\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Endpoint id\",\n" +
+            "            \"name\": \"endpoint_id\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"text\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Login\",\n" +
+            "            \"name\": \"login\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"text\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Private Key\",\n" +
+            "            \"name\": \"private_key\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"text\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Expired Minutes\",\n" +
+            "            \"name\": \"expired_minutes\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"int\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Expired Hours\",\n" +
+            "            \"name\": \"expired_hours\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"int\"\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
 
 
-    String protocol_versions$path = "protocols.v2.ProviderConnector.v1.protocol_pix_acquiring";
-    ILogicServices servicesProtocol = new AquairingLogic();
-    int providers_id = 5181;
-    String provider_services$currency = "BRL";
-    String gateway_logic = "logics.services.v2.wallet_topup_via_transfero_qr_code.v1.logic";
-    String points$name = "Точка стейдж 7";
-    String accounts$name = "Аккаунт стейдж 7";
-    boolean forMerchant = false;
-    boolean pay_in = true;
+    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_payout";
+    ILogicServices servicesProtocol = new H2HLogic();
+    int providers_id = 5182;
+    String provider_services$currency = "UZS";
+    String gateway_logic = "logics.services.default_service.v1.logic";
+    String points$name = "Точка стейдж 3";
+    String accounts$name = "Аккаунт стейдж 3";
+    boolean pay_in = false;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
@@ -42,7 +89,7 @@ public class CreateProtocolNew extends BaseTest {
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1206,protocol_id);
+        protocol.change_connector_protocolId(1208,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола
@@ -53,9 +100,9 @@ public class CreateProtocolNew extends BaseTest {
 
     //добавить запись в providers - сказать имя+protocol_id из protocol_versions + ссылку на стейдж Коннектора + id из providersКонектора = получаю providers ид
 
-    public void makeApiPay() throws SQLException {
+    public void makeProtocol() throws SQLException {
 
-        protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true); // date добавить
+        protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true);
 
         protocol.services(protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,gateway_logic,servicesProtocol);
 
@@ -75,7 +122,7 @@ public class CreateProtocolNew extends BaseTest {
 
         protocol.account(accounts$name);
 
-        protocol.wallets_account(protocol.getAccounts$id(),provider_services$currency,forMerchant);
+        protocol.wallets_account(protocol.getAccounts$id(),provider_services$currency,pay_in);
     }
     @AfterTest
     void closeConn(){

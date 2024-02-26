@@ -11,11 +11,10 @@ public class MoneyGramm extends FrameActivity implements IFrame{
 
     public void next(){
         GUIButton button = null;
-        if (step == 1) {
-            button = new GUIButton(new Locator().xpath("//button[@type=\"submit\"]"));
-            step++;
-        } else if (step == 2) {
-            button = new GUIButton(new Locator().xpath("//div[@class='registration-button-row']/button[@type=\"submit\"]"));
+        try {
+            button = new GUIButton(new Locator().xpath("//span[contains(text(),'Далі')]"));
+        } catch (Throwable e){
+            button = new GUIButton(new Locator().xpath("//span[contains(text(),'Підтвердити')]"));
         }
         button.click();
     }

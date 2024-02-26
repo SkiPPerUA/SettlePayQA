@@ -10,21 +10,24 @@ abstract class ProvidersMethods {
 
     protected static Logger logger = Logger.getLogger(ProvidersMethods.class);
     protected Response response;
+    protected String id;
+
     void create(IProviders provider){
         logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/create";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
                 .when()
                 .post(urlRequest);
         logger.info("Create - "+ getResponse());
+        id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
     }
 
     void get_methods_list(IProviders provider){
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/get-methods-list";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -35,7 +38,7 @@ abstract class ProvidersMethods {
 
     void confirm(IProviders provider){
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/confirm";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -46,7 +49,7 @@ abstract class ProvidersMethods {
 
     void cancel(IProviders provider){
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/cancel";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -57,7 +60,7 @@ abstract class ProvidersMethods {
 
     void get_recipient_card(IProviders provider){
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/p2p/get-recipient-card";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
@@ -69,13 +72,14 @@ abstract class ProvidersMethods {
     void pay(IProviders provider){
         logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/pay";
-        logger.info("URL - "+urlRequest);
+        //logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
                 .when()
                 .post(urlRequest);
         logger.info("Pay - "+ getResponse());
+        id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
     }
 
     abstract String getResponse();

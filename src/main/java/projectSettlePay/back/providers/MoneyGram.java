@@ -1,10 +1,15 @@
 package projectSettlePay.back.providers;
 
+import projectSettlePay.front.IFrame;
+import projectSettlePay.front.MoneyGramm;
+
 public class MoneyGram extends ProvidersMethods implements Pay_out{
 
     private int core = 4;
     private int conn = 4;
     private String body = "";
+
+    public IFrame frame = new MoneyGramm();
 
     public MoneyGram(String body){
         this.body = body;

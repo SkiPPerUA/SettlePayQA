@@ -35,8 +35,7 @@ public class Protocol {
     }
 
     public void add_schema(String schema, String name) throws SQLException {
-        dataConn.updateSql("insert into public.provider_credentials_templates(credentials_scheme,created_at, updated_at,\"name\") " +
-                "values('"+schema+"', '"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"', '"+name+"')");
+        dataConn.updateSql("insert into public.provider_credentials_templates(credentials_scheme,created_at, updated_at,\"name\") values('"+schema+"', '"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"', '"+name+"')");
         res = dataConn.selectSql("SELECT x.* FROM public.provider_credentials_templates x WHERE \"name\" = '"+name+"' order by id desc");
         res.next();
         System.out.println("schema id = "+res.getInt("id"));
@@ -187,7 +186,7 @@ public class Protocol {
 
     public void wallets_account(int accounts$id, String provider_services$currency, boolean forMerchant) throws SQLException {
         String request = "";
-        if (forMerchant){
+        if (!forMerchant){
             request = "SELECT x.id FROM public.account_wallets x WHERE account_id = "+accounts$id+" and \"name\" like '%"+provider_services$currency+" for%'";
         }else {
             request = "SELECT x.id FROM public.account_wallets x WHERE account_id = "+accounts$id+" and \"name\" like '%"+provider_services$currency+"'";
