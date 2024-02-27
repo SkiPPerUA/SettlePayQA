@@ -4,9 +4,11 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import projectSettlePay.core.DataBase;
+import projectSettlePay.helper.DataProviders;
+
 import java.lang.reflect.Method;
 
-public abstract class BaseTest implements DataBase.DataBaseName{
+public abstract class BaseTest implements DataBase.DataBaseName, DataProviders {
 
     protected static Logger logger = Logger.getLogger("Test");
 

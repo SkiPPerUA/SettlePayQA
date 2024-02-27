@@ -79,7 +79,12 @@ abstract class ProvidersMethods {
                 .when()
                 .post(urlRequest);
         logger.info("Pay - "+ getResponse());
-        id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
+        try {
+            id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
+        }catch (NullPointerException e){
+            logger.error(e);
+        }
+
     }
 
     abstract String getResponse();

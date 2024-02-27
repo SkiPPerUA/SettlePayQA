@@ -20,6 +20,7 @@ public class Callback {
         String result_url = "";
         long childTrans = Long.valueOf(provider.getId()) + 1;
         try {
+            Thread.sleep(2000);
             dataBase = new DataBase(CONN_STAGE_1);
             ResultSet resultSet = dataBase.selectSql("SELECT x.transaction_uuid FROM public.transactions x WHERE external_transaction_id = '"+childTrans+"'");
             resultSet.next();
