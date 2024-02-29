@@ -1,11 +1,24 @@
 package projectSettlePay.back.providers;
 
-import projectSettlePay.back.Callback;
 
 public class Munzen extends ProvidersMethods implements Pay_out{
     private int core = 3;
     private int conn = 3;
     private String body = "";
+
+//    connector_Id = 1127
+//    schema id = 39
+//    айдшка кред 1208
+//
+//    providers_id = 5182
+//    Services_id = 4233
+//    Point = 2754
+//    01607df2a07b633ea35a909152ba6061
+//    Account_id = 2760
+//    Wallets_id = 3690
+//    provider_services$id = 5414
+//    service_commission_lines$id = 5165
+//    service_commission_lines$id = 5166
 
     public Munzen(String body){
         this.body = body;

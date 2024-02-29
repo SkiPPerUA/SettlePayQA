@@ -55,7 +55,7 @@ public class MunzenPayOut extends BaseTest {
         showAgoraURL(munzen.getId());
     }
 
-    @Test(invocationCount = 1, enabled = false)
+    @Test(invocationCount = 1, enabled = true)
     private void pending() {
         body = "{\n" +
                 "    \"auth\": {\n" +
@@ -144,7 +144,6 @@ public class MunzenPayOut extends BaseTest {
         munzen = new Munzen(body);
         munzen.pay_out();
         showAgoraURL(munzen.getId());
-        Assert.fail("проверить");
     }
 
     public void positive_amountMIN() throws InterruptedException {
