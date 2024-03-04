@@ -1,14 +1,15 @@
 package projectSettlePay.back.providers;
 
+import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;
 
 public class TwoPayler extends ProvidersMethods implements Pay_out, Pay_in {
 
-    private int core = 1;
-    private int conn = 6;
+    private int core = 3;
+    private int conn = 3;
     private String body = "";
 
-    private IFrame frame;
+    public AcquiringFrame frame = new AcquiringFrame();
 
     public TwoPayler(String body){
         this.body = body;
@@ -96,7 +97,7 @@ public class TwoPayler extends ProvidersMethods implements Pay_out, Pay_in {
                         "    \"account_id\": 4,\n" +
                         "    \"wallet_id\": 10,\n" +
                         "    \"service_id\": 3304,\n" +
-                        "    \"amount\": 20000,\n" +
+                        "    \"amount\": 50000,\n" +
                         "    \"amount_currency\": \"UAH\",\n" +
                         "    \"fields\" : {\n" +
                         "    \"first_name\" : \"roman\",\n" +
