@@ -38,7 +38,7 @@ public class Protocol {
         dataConn.updateSql("insert into public.provider_credentials_templates(credentials_scheme,created_at, updated_at,\"name\") values('"+schema+"', '"+ Data.getCurrentTime() +"','"+ Data.getCurrentTime()+"', '"+name+"')");
         res = dataConn.selectSql("SELECT x.* FROM public.provider_credentials_templates x WHERE \"name\" = '"+name+"' order by id desc");
         res.next();
-        System.out.println("schema id = "+res.getInt("id"));
+        logger.info("schema id = "+res.getInt("id"));
     }
 
     public void protocol_id(String protocol_versions$path) throws SQLException {

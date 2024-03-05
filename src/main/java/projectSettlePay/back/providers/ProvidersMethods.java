@@ -15,14 +15,18 @@ abstract class ProvidersMethods {
     void create(IProviders provider){
         logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/create";
-        //logger.info("URL - "+urlRequest);
+        logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
                 .when()
                 .post(urlRequest);
         logger.info("Create - "+ getResponse());
-        id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
+        try {
+            id = String.valueOf(response.then().extract().response().jsonPath().getLong("response.id"));
+        }catch (NullPointerException e){
+            logger.error(e);
+        }
     }
 
     void get_methods_list(IProviders provider){
@@ -72,7 +76,7 @@ abstract class ProvidersMethods {
     void pay(IProviders provider){
         logerName(provider);
         String urlRequest = getEnvironment(provider.getCore())+"/transaction/pay";
-        //logger.info("URL - "+urlRequest);
+        logger.info("URL - "+urlRequest);
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())

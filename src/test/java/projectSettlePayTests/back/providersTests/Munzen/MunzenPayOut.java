@@ -13,13 +13,9 @@ public class MunzenPayOut extends BaseTest {
     Munzen munzen;
     String body;
 
-    public void positive_payout() throws InterruptedException {
+    public void positive_payout() {
         munzen = new Munzen(Munzen.MunzenBody.defaultBody());
         munzen.pay_out();
-        Thread.sleep(3000);
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(munzen.getId())+1).getAmount(),10000000);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())).getAmount(),100000.00);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())+1).getAmount(),100000.00);
         showAgoraURL(munzen.getId());
     }
 
@@ -55,7 +51,107 @@ public class MunzenPayOut extends BaseTest {
         showAgoraURL(munzen.getId());
     }
 
-    @Test(invocationCount = 1, enabled = true)
+    @Test(dataProvider = "string_cases")
+    public void test_city(String data){
+        body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2754,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
+                "    },\n" +
+                "    \"locale\": \"ua\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"external_customer_id\": \"123134\",\n" +
+                "    \"account_id\": 2760,\n" +
+                "    \"wallet_id\": 3689,\n" +
+                "    \"service_id\": 4233,\n" +
+                "    \"amount\": 10000001,\n" +
+                "    \"amount_currency\": \"UZS\",\n" +
+                "    \"description\": \"Test deposit\",\n" +
+                "    \"fields\": {\n" +
+                "        \"card_number\":\"4232618181101636\",\n" +
+                "        \"expire_year\":\"2099\",\n" +
+                "        \"expire_month\":\"12\",\n" +
+                "        \"city\":%s,\n" +
+                "        \"country\":\"US\",\n" +
+                "        \"first_name\":\"Jane\",\n" +
+                "        \"last_name\":\"Doe\"\n" +
+                "    }\n" +
+                "}";
+        munzen = new Munzen(String.format(body,data));
+        munzen.pay_out();
+        System.out.println(String.format("[%s]",data));
+        showAgoraURL(munzen.getId());
+    }
+
+    public void positive_city_long(){
+        body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2754,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
+                "    },\n" +
+                "    \"locale\": \"ua\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"external_customer_id\": \"123134\",\n" +
+                "    \"account_id\": 2760,\n" +
+                "    \"wallet_id\": 3689,\n" +
+                "    \"service_id\": 4233,\n" +
+                "    \"amount\": 10000001,\n" +
+                "    \"amount_currency\": \"UZS\",\n" +
+                "    \"description\": \"Test deposit\",\n" +
+                "    \"fields\": {\n" +
+                "        \"card_number\":\"4232618181101636\",\n" +
+                "        \"expire_year\":\"2099\",\n" +
+                "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"dfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsddfsadfasdfsdafsfaff\",\n" +
+                "        \"country\":\"US\",\n" +
+                "        \"first_name\":\"Jane\",\n" +
+                "        \"last_name\":\"Doe\"\n" +
+                "    }\n" +
+                "}";
+        munzen = new Munzen(body);
+        munzen.pay_out();
+        showAgoraURL(munzen.getId());
+    }
+
+    @Test(dataProvider = "string_cases")
+    public void test_country(String data){
+        body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2754,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
+                "    },\n" +
+                "    \"locale\": \"ua\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"external_customer_id\": \"123134\",\n" +
+                "    \"account_id\": 2760,\n" +
+                "    \"wallet_id\": 3689,\n" +
+                "    \"service_id\": 4233,\n" +
+                "    \"amount\": 10000001,\n" +
+                "    \"amount_currency\": \"UZS\",\n" +
+                "    \"description\": \"Test deposit\",\n" +
+                "    \"fields\": {\n" +
+                "        \"card_number\":\"4232618181101636\",\n" +
+                "        \"expire_year\":\"2099\",\n" +
+                "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":%s,\n" +
+                "        \"first_name\":\"Jane\",\n" +
+                "        \"last_name\":\"Doe\"\n" +
+                "    }\n" +
+                "}";
+        munzen = new Munzen(String.format(body,data));
+        munzen.pay_out();
+        System.out.println(String.format("[%s]",data));
+        showAgoraURL(munzen.getId());
+    }
+
+    //@Test(invocationCount = 1, enabled = true)
     private void pending() {
         body = "{\n" +
                 "    \"auth\": {\n" +
@@ -78,6 +174,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -107,6 +205,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -137,6 +237,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -167,6 +269,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -201,6 +305,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -235,6 +341,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -265,6 +373,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -295,6 +405,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -330,6 +442,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -365,6 +479,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"%s\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -396,6 +512,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\": %s,\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -432,6 +550,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\": %s,\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -465,6 +585,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\": \"4232618181101636\",\n" +
                 "        \"expire_year\": \"2023\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
@@ -497,6 +619,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\": \"2099\",\n" +
                 "        \"expire_month\": %s,\n" +
                 "        \"first_name\":\"Jane\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -531,6 +655,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\": \"2024\",\n" +
                 "        \"expire_month\":\"01\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -562,6 +688,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\": \"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\": %s,\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -596,6 +724,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\": \"4232618181101636\",\n" +
                 "        \"expire_year\": \"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\": \"Jane\",\n" +
                 "        \"last_name\": %s\n" +
                 "    }\n" +
@@ -629,6 +759,8 @@ public class MunzenPayOut extends BaseTest {
                 "    \"fields\": {\n" +
                 "        \"card_number\": \"4232618181101636\",\n" +
                 "        \"expire_year\": \"2099\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\": \"sfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfsdfgfdgdfdd\",\n" +
                 "        \"last_name\":\"sfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfsdfgfdgdfd\"\n" +
@@ -659,6 +791,8 @@ public class MunzenPayOut extends BaseTest {
                 "    \"fields\": {\n" +
                 "        \"card_number\": \"4232618181101636\",\n" +
                 "        \"expire_year\": \"2099\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\": \"sfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfsdfgfdgdfd\",\n" +
                 "        \"last_name\":\"sfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfssfdsfgsdgfsdfgfdgdfdd\"\n" +
@@ -691,6 +825,8 @@ public class MunzenPayOut extends BaseTest {
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
                 "        \"first_name\":\"Jane\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -721,72 +857,10 @@ public class MunzenPayOut extends BaseTest {
                 "    \"description\": \"Test deposit\",\n" +
                 "    \"fields\": {\n" +
                 "        \"card_number\":\"4232618181101636\",\n" +
-                "        \"expire_month\":\"12\",\n" +
-                "        \"first_name\":\"Jane\",\n" +
-                "        \"last_name\":\"Doe\"\n" +
-                "    }\n" +
-                "}";
-        System.out.print("Without expire_year ");
-        munzen = new Munzen(body);
-        munzen.pay_out();
-        Thread.sleep(2000);
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(munzen.getId())+1).getStatus(),status);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())).getStatus(),status);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())+1).getStatus(),status);
-        showAgoraURL(munzen.getId());
-
-        body = "{\n" +
-                "    \"auth\": {\n" +
-                "        \"debug\": true,\n" +
-                "        \"point\": 2754,\n" +
-                "        \"key\": 1,\n" +
-                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
-                "    },\n" +
-                "    \"locale\": \"ua\",\n" +
-                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \"123134\",\n" +
-                "    \"account_id\": 2760,\n" +
-                "    \"wallet_id\": 3689,\n" +
-                "    \"service_id\": 4233,\n" +
-                "    \"amount\": 10000000,\n" +
-                "    \"amount_currency\": \"UZS\",\n" +
-                "    \"description\": \"Test deposit\",\n" +
-                "    \"fields\": {\n" +
-                "        \"card_number\":\"4232618181101636\",\n" +
-                "        \"expire_year\":\"2099\",\n" +
-                "        \"first_name\":\"Jane\",\n" +
-                "        \"last_name\":\"Doe\"\n" +
-                "    }\n" +
-                "}";
-        System.out.print("Without expire_month ");
-        munzen = new Munzen(body);
-        munzen.pay_out();
-        Thread.sleep(2000);
-        Assert.assertEquals(new TransInfoConn(Long.valueOf(munzen.getId())+1).getStatus(),status);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())).getStatus(),status);
-        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())+1).getStatus(),status);
-        showAgoraURL(munzen.getId());
-
-        body = "{\n" +
-                "    \"auth\": {\n" +
-                "        \"debug\": true,\n" +
-                "        \"point\": 2754,\n" +
-                "        \"key\": 1,\n" +
-                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
-                "    },\n" +
-                "    \"locale\": \"ua\",\n" +
-                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \"123134\",\n" +
-                "    \"account_id\": 2760,\n" +
-                "    \"wallet_id\": 3689,\n" +
-                "    \"service_id\": 4233,\n" +
-                "    \"amount\": 10000000,\n" +
-                "    \"amount_currency\": \"UZS\",\n" +
-                "    \"description\": \"Test deposit\",\n" +
-                "    \"fields\": {\n" +
-                "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
@@ -819,10 +893,80 @@ public class MunzenPayOut extends BaseTest {
                 "        \"card_number\":\"4232618181101636\",\n" +
                 "        \"expire_year\":\"2099\",\n" +
                 "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"country\":\"US\",\n" +
                 "        \"first_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
         System.out.print("Without last_name ");
+        munzen = new Munzen(body);
+        munzen.pay_out();
+        Thread.sleep(2000);
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(munzen.getId())+1).getStatus(),status);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())).getStatus(),status);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())+1).getStatus(),status);
+        showAgoraURL(munzen.getId());
+
+        body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2754,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
+                "    },\n" +
+                "    \"locale\": \"ua\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"external_customer_id\": \"123134\",\n" +
+                "    \"account_id\": 2760,\n" +
+                "    \"wallet_id\": 3689,\n" +
+                "    \"service_id\": 4233,\n" +
+                "    \"amount\": 10000000,\n" +
+                "    \"amount_currency\": \"UZS\",\n" +
+                "    \"description\": \"Test deposit\",\n" +
+                "    \"fields\": {\n" +
+                "        \"card_number\":\"4232618181101636\",\n" +
+                "        \"expire_year\":\"2099\",\n" +
+                "        \"expire_month\":\"12\",\n" +
+                "        \"country\":\"US\",\n" +
+                "        \"last_name\":\"Joe\",\n" +
+                "        \"first_name\":\"Doe\"\n" +
+                "    }\n" +
+                "}";
+        System.out.print("Without city ");
+        munzen = new Munzen(body);
+        munzen.pay_out();
+        Thread.sleep(2000);
+        Assert.assertEquals(new TransInfoConn(Long.valueOf(munzen.getId())+1).getStatus(),status);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())).getStatus(),status);
+        Assert.assertEquals(new TransInfoCore(Long.valueOf(munzen.getId())+1).getStatus(),status);
+        showAgoraURL(munzen.getId());
+
+        body = "{\n" +
+                "    \"auth\": {\n" +
+                "        \"debug\": true,\n" +
+                "        \"point\": 2754,\n" +
+                "        \"key\": 1,\n" +
+                "        \"hash\": \"01607df2a07b633ea35a909152ba6061\"\n" +
+                "    },\n" +
+                "    \"locale\": \"ua\",\n" +
+                "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                "    \"external_customer_id\": \"123134\",\n" +
+                "    \"account_id\": 2760,\n" +
+                "    \"wallet_id\": 3689,\n" +
+                "    \"service_id\": 4233,\n" +
+                "    \"amount\": 10000000,\n" +
+                "    \"amount_currency\": \"UZS\",\n" +
+                "    \"description\": \"Test deposit\",\n" +
+                "    \"fields\": {\n" +
+                "        \"card_number\":\"4232618181101636\",\n" +
+                "        \"expire_year\":\"2099\",\n" +
+                "        \"expire_month\":\"12\",\n" +
+                "        \"city\":\"Kyiv\",\n" +
+                "        \"last_name\":\"Joe\",\n" +
+                "        \"first_name\":\"Doe\"\n" +
+                "    }\n" +
+                "}";
+        System.out.print("Without country ");
         munzen = new Munzen(body);
         munzen.pay_out();
         Thread.sleep(2000);

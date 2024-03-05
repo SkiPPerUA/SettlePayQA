@@ -1,4 +1,4 @@
-package projectSettlePayTests.back.providersTests;
+package projectSettlePayTests.back.providersTests.EZpay;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;

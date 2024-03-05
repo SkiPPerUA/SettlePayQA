@@ -83,6 +83,8 @@ public class Munzen extends ProvidersMethods implements Pay_out{
                         "        \"expire_year\":\"2099\",\n" +
                         "        \"expire_month\":\"12\",\n" +
                         "        \"first_name\":\"Jane\",\n" +
+                        "        \"city\":\"Kyiv\",\n" +
+                        "        \"country\":\"US\",\n" +
                         "        \"last_name\":\"Doe\"\n" +
                         "    }\n" +
                         "}";

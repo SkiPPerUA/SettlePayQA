@@ -5,8 +5,8 @@ import projectSettlePay.front.IFrame;
 
 public class TwoPayler extends ProvidersMethods implements Pay_out, Pay_in {
 
-    private int core = 3;
-    private int conn = 3;
+    private int core = 3; //1
+    private int conn = 3; //6
     private String body = "";
 
     public AcquiringFrame frame = new AcquiringFrame();

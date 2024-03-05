@@ -16,80 +16,65 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
-    int protocol_id = 145;
-    String provider_services$name = "Munzen_payout";
+    int protocol_id = 50;
+    String provider_services$name = "Trio_PIX_payout";
     String schema = "{\n" +
+            "    \"provider_slug\": \"trio_pay_in\",\n" +
             "    \"schema\": [\n" +
+            "        {\n" +
+            "            \"label\": \"Client Secret\",\n" +
+            "            \"name\": \"client_secret\",\n" +
+            "            \"required\": true,\n" +
+            "            \"type\": \"string\"\n" +
+            "        },\n" +
             "        {\n" +
             "            \"label\": \"Base Url\",\n" +
             "            \"name\": \"base_url\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"text\",\n" +
-            "            \"placeholder\": \"https://...\",\n" +
-            "            \"value\": \"\"\n" +
+            "            \"type\": \"string\",\n" +
+            "            \"value\": \"https://sandbox.trio.com.br/\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Control key\",\n" +
-            "            \"name\": \"control_key\",\n" +
+            "            \"label\": \"Client ID\",\n" +
+            "            \"name\": \"client_id\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"text\"\n" +
+            "            \"type\": \"uuid\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Endpoint id\",\n" +
-            "            \"name\": \"endpoint_id\",\n" +
+            "            \"label\": \"Pix Key ID\",\n" +
+            "            \"name\": \"pix_key_id\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"text\"\n" +
+            "            \"type\": \"uuid\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Login\",\n" +
-            "            \"name\": \"login\",\n" +
+            "            \"label\": \"Virtual Account ID\",\n" +
+            "            \"name\": \"virtual_account_id\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"text\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"label\": \"Private Key\",\n" +
-            "            \"name\": \"private_key\",\n" +
-            "            \"required\": true,\n" +
-            "            \"type\": \"text\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"label\": \"Expired Minutes\",\n" +
-            "            \"name\": \"expired_minutes\",\n" +
-            "            \"required\": false,\n" +
-            "            \"type\": \"int\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"label\": \"Expired Hours\",\n" +
-            "            \"name\": \"expired_hours\",\n" +
-            "            \"required\": false,\n" +
-            "            \"type\": \"int\"\n" +
+            "            \"type\": \"uuid\"\n" +
             "        }\n" +
             "    ]\n" +
             "}";
 
 
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_payout";
-    ILogicServices servicesProtocol = new H2HLogic();
-    int providers_id = 5182;
-    String provider_services$currency = "UZS";
+    ILogicServices servicesProtocol = new AquairingLogic();
+    int providers_id = 5185;
+    String provider_services$currency = "BRL";
     String gateway_logic = "logics.services.default_service.v1.logic";
-    String points$name = "Точка стейдж 3";
-    String accounts$name = "Аккаунт стейдж 3";
+    String points$name = "Точка стейдж 1";
+    String accounts$name = "Аккаунт стейдж 1";
     boolean pay_in = false;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
         protocol.connector_protocolId(protocol_id,provider_services$name);
+        protocol.add_schema(schema,provider_services$name);
     }
     // добавить креды в provider_credentials - получаю ид
 
-    public void insert_schema() throws SQLException {
-        protocol.add_schema(schema,provider_services$name);
-    }
-
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1208,protocol_id);
+        protocol.change_connector_protocolId(103,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола

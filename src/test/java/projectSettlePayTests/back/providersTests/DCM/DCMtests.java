@@ -1,4 +1,4 @@
-package projectSettlePayTests.back.providersTests;
+package projectSettlePayTests.back.providersTests.DCM;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
