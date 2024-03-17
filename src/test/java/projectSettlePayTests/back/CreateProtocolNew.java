@@ -7,8 +7,6 @@ import projectSettlePay.back.logics.AquairingLogic;
 import projectSettlePay.back.logics.H2HLogic;
 import projectSettlePay.back.logics.ILogicServices;
 import projectSettlePay.back.Protocol;
-import projectSettlePay.back.logics.P2PLogic;
-import projectSettlePay.core.DataBase;
 import projectSettlePay.helper.MD5hash;
 
 import java.sql.SQLException;
@@ -73,27 +71,29 @@ public class CreateProtocolNew extends BaseTest {
     int providers_id = 5451;
     String provider_services$currency = "BDT";
     String gateway_logic = "logics.services.wallet_topup_via_provider_form.v1.logic";
-    String points$name = "Точка стейдж 6";
-    String accounts$name = "Аккаунт стейдж 6";
+    String stage = "6";
     boolean pay_in = true;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
         protocol.connector_protocolId(protocol_id,provider_services$name);
         protocol.add_schema(schema,provider_services$name);
+        protocol.protocol_id(protocol_versions$path);
+        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
+
     }
-    // добавить креды в provider_credentials - получаю ид
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
         protocol.change_connector_protocolId(1343,protocol_id);
     }
-    public void getProtocolID() throws SQLException {
-        //создаем-связку протокола
-        protocol.protocol_id(protocol_versions$path);
-        makeConnector();
-        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
-    }
+
+//    public void getProtocolID() throws SQLException {
+//        //создаем-связку протокола
+//        protocol.protocol_id(protocol_versions$path);
+//        makeConnector();
+//        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
+//    }
 
     //добавить запись в providers - сказать имя+protocol_id из protocol_versions + ссылку на стейдж Коннектора + id из providersКонектора = получаю providers ид
 
@@ -105,7 +105,7 @@ public class CreateProtocolNew extends BaseTest {
 
         protocol.wallet_services(protocol.getServices$id());
 
-        protocol.points_id(points$name);
+        protocol.points_id(stage);
 
         System.out.println(MD5hash.getHash(protocol.getPoints$id()+protocol.getApi_token()+1));
 
@@ -117,7 +117,7 @@ public class CreateProtocolNew extends BaseTest {
 
         protocol.service_provider_services(protocol.getServices$id(), protocol.getProvider_services$id());
 
-        protocol.account(accounts$name);
+        protocol.account(stage);
 
         protocol.wallets_account(protocol.getAccounts$id(),provider_services$currency,pay_in);
     }

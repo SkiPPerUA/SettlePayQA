@@ -122,13 +122,13 @@ public class Protocol {
     }
 
     public void points_id(String points$name) throws SQLException {
-        res = dataApiPay.selectSql("SELECT * FROM public.points WHERE \"name\" = '"+ points$name +"'");
+        res = dataApiPay.selectSql("SELECT * FROM public.points WHERE \"name\" = 'Точка стейдж "+ points$name +"'");
         if (res.next()){
             points$id = res.getInt("id");
             api_token = res.getString("api_token");
             System.out.println("Point = "+points$id);
         }else {
-            Assert.fail(points$name + " не найден");
+            Assert.fail("Точка стейдж "+points$name + " не найден");
         }
     }
 
@@ -174,12 +174,12 @@ public class Protocol {
     }
 
     public void account(String accounts$name) throws SQLException {
-        res = dataApiPay.selectSql("SELECT id FROM public.accounts WHERE \"name\" = '"+accounts$name+"'");
+        res = dataApiPay.selectSql("SELECT id FROM public.accounts WHERE \"name\" = 'Аккаунт стейдж "+accounts$name+"'");
         if (res.next()){
             accounts$id = res.getInt(1);
             System.out.println("Account_id = "+accounts$id);
         }else {
-            System.out.println("Нужно создать");
+            System.out.println("Нужно создать аккаунт");
             Assert.fail();
         }
     }
