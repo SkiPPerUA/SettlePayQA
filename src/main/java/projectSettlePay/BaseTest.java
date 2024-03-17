@@ -1,14 +1,13 @@
 package projectSettlePay;
 
 import org.apache.log4j.Logger;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import projectSettlePay.core.DataBase;
-import projectSettlePay.helper.DataProviders;
+import projectSettlePay.helper.TestCases;
 
 import java.lang.reflect.Method;
 
-public abstract class BaseTest implements DataBase.DataBaseName, DataProviders {
+public abstract class BaseTest implements DataBase.DataBaseName, TestCases {
 
     protected static Logger logger = Logger.getLogger("Test");
 

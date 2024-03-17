@@ -21,6 +21,11 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    @Override
     public IFrame getFrame() {
         return frame;
     }

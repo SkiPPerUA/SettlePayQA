@@ -20,6 +20,10 @@ public class GetaPay extends ProvidersMethods implements Pay_in {
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+    @Override
     public IFrame getFrame() {
         return frame;
     }

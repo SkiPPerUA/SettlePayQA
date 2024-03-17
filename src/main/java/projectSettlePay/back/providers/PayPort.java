@@ -15,6 +15,9 @@ public class PayPort extends ProvidersMethods implements Pay_in, Pay_out {
     public PayPort(String body){
         this.body = body;
     }
+    public PayPort(){
+
+    }
 
     public void pay_in(){
         create(this);
@@ -57,6 +60,11 @@ public class PayPort extends ProvidersMethods implements Pay_in, Pay_out {
     @Override
     public void setCore(int core){
         this.core = core;
+    }
+
+    @Override
+    public void setBody(String body) {
+        this.body = body;
     }
 
     @Override

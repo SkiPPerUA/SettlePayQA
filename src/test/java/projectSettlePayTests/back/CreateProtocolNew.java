@@ -16,54 +16,66 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
-    int protocol_id = 50;
-    String provider_services$name = "Trio_PIX_payout";
+    int protocol_id = 157;
+    String provider_services$name = "Payport_PayIn_HPP";
     String schema = "{\n" +
-            "    \"provider_slug\": \"trio_pay_in\",\n" +
             "    \"schema\": [\n" +
             "        {\n" +
-            "            \"label\": \"Client Secret\",\n" +
-            "            \"name\": \"client_secret\",\n" +
-            "            \"required\": true,\n" +
-            "            \"type\": \"string\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"label\": \"Base Url\",\n" +
+            "            \"label\": \"base_url\",\n" +
             "            \"name\": \"base_url\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"string\",\n" +
-            "            \"value\": \"https://sandbox.trio.com.br/\"\n" +
+            "            \"type\": \"text\",\n" +
+            "            \"value\": \"\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Client ID\",\n" +
-            "            \"name\": \"client_id\",\n" +
+            "            \"label\": \"merchant_api_key\",\n" +
+            "            \"name\": \"merchant_api_key\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"uuid\"\n" +
+            "            \"type\": \"text\",\n" +
+            "            \"value\": \"\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Pix Key ID\",\n" +
-            "            \"name\": \"pix_key_id\",\n" +
-            "            \"required\": true,\n" +
-            "            \"type\": \"uuid\"\n" +
+            "            \"label\": \"expired_secs\",\n" +
+            "            \"name\": \"expired_secs\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"int\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"Virtual Account ID\",\n" +
-            "            \"name\": \"virtual_account_id\",\n" +
+            "            \"label\": \"currency2currency\",\n" +
+            "            \"name\": \"currency2currency\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"uuid\"\n" +
+            "            \"type\": \"boolean\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"client_expense\",\n" +
+            "            \"name\": \"client_expense\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"number\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Expired Minutes\",\n" +
+            "            \"name\": \"expired_minutes\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"int\"\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"label\": \"Expired Hours\",\n" +
+            "            \"name\": \"expired_hours\",\n" +
+            "            \"required\": false,\n" +
+            "            \"type\": \"int\"\n" +
             "        }\n" +
             "    ]\n" +
             "}";
 
 
-    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_payout";
+    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
     ILogicServices servicesProtocol = new AquairingLogic();
-    int providers_id = 5185;
-    String provider_services$currency = "BRL";
-    String gateway_logic = "logics.services.default_service.v1.logic";
-    String points$name = "Точка стейдж 1";
-    String accounts$name = "Аккаунт стейдж 1";
-    boolean pay_in = false;
+    int providers_id = 5451;
+    String provider_services$currency = "BDT";
+    String gateway_logic = "logics.services.wallet_topup_via_provider_form.v1.logic";
+    String points$name = "Точка стейдж 6";
+    String accounts$name = "Аккаунт стейдж 6";
+    boolean pay_in = true;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид из МД файла в public.providers x (конектор)
@@ -74,7 +86,7 @@ public class CreateProtocolNew extends BaseTest {
 
     public void update_connector_protocolId(){
         //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(103,protocol_id);
+        protocol.change_connector_protocolId(1343,protocol_id);
     }
     public void getProtocolID() throws SQLException {
         //создаем-связку протокола

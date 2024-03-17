@@ -17,6 +17,10 @@ public class PayzEasy extends ProvidersMethods implements Pay_in, Pay_out {
         this.body = body;
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
     public void pay_in(){
         create(this);
     }

@@ -16,6 +16,12 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
         this.body = body;
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+
     public AstroPay(String body, boolean pix){
         this.body = body;
         if (pix) {

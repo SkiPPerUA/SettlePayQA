@@ -3,10 +3,14 @@ package projectSettlePay.back.providers;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.log4j.Logger;
+import projectSettlePay.core.DataBase;
+import projectSettlePay.helper.TransInfoHelper;
+
+import java.sql.ResultSet;
 
 import static io.restassured.RestAssured.given;
 
-abstract class ProvidersMethods {
+abstract class ProvidersMethods implements TransInfoHelper {
 
     protected static Logger logger = Logger.getLogger(ProvidersMethods.class);
     protected Response response;
@@ -80,7 +84,7 @@ abstract class ProvidersMethods {
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
-                .when()
+                .when().log().all()
                 .post(urlRequest);
         logger.info("Pay - "+ getResponse());
         try {
@@ -100,11 +104,15 @@ abstract class ProvidersMethods {
 
     private String getEnvironment(int core){
         if (core == 1){
-            return "https://api-new.backofficeweb.info/";
+            return "https://api-new.backofficeweb.info";
             //return "https://gateway-api-server-stage.backofficeweb.info";
         }else {
             return String.format("https://api-stage-%s.backofficeweb.info",core);
             //return String.format("https://gateway-api-server-stage%s.backofficeweb.info", core);
         }
+    }
+
+    public String getChildId(){
+        return getChildId(id);
     }
 }

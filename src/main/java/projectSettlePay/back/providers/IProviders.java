@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface IProviders {
 
+     void setBody(String body);
+
      String getBody();
 
      int getCore();

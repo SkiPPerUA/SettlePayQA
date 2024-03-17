@@ -2,6 +2,7 @@ package projectSettlePay.core;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -19,5 +20,14 @@ abstract public class Widget {
             }
         }
         return element;
+    }
+
+    public void scrollToElement(){
+        ((JavascriptExecutor) Session.getDriver()).executeScript("arguments[0].scrollIntoView(true);", getElement());
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

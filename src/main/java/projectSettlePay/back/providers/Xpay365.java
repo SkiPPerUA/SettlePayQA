@@ -19,6 +19,11 @@ public class Xpay365 extends ProvidersMethods implements Pay_out, Pay_in {
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    @Override
     public IFrame getFrame() {
         return frame;
     }

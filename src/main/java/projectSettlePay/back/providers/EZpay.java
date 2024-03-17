@@ -12,6 +12,11 @@ public class EZpay extends ProvidersMethods implements Pay_in, Pay_out {
 
     public AcquiringFrame frame = new AcquiringFrame();
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public EZpay(String body, String method){
         this.body = body;
         if (method.equals("p2p")){

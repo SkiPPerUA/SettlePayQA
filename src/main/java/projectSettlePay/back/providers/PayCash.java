@@ -6,7 +6,7 @@ import projectSettlePay.front.PayCashFrame;
 public class PayCash extends ProvidersMethods implements Pay_in{
 
     private int core = 2;
-    private int conn = 2;
+    private int conn = 8;
     private String body = "";
 
     public PayCashFrame frame = new PayCashFrame();
@@ -19,6 +19,10 @@ public class PayCash extends ProvidersMethods implements Pay_in{
         create(this);
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
     @Override
     public IFrame getFrame() {
         return frame;

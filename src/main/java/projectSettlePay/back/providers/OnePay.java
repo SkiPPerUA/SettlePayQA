@@ -19,6 +19,10 @@ public class OnePay extends ProvidersMethods implements Pay_in, Pay_out {
         create(this);
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
     public void pay_out(){
         pay(this);
     }

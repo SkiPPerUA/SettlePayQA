@@ -19,6 +19,10 @@ public class PUMB extends ProvidersMethods implements Pay_out{
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+    @Override
     public void setCore(int core){
         this.core = core;
     }

@@ -47,6 +47,11 @@ public class Munzen extends ProvidersMethods implements Pay_out{
         return response.then().extract().response().asString();
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public String getPayURL(){
         return response.then().extract().response().jsonPath().get("response.result.pay_url");
     }

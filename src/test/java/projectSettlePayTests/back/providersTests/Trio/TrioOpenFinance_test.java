@@ -13,5 +13,6 @@ public class TrioOpenFinance_test extends BaseTest {
         trioOpenFinance = new TrioOpenFinance(TrioOpenFinance.TrioOpenFinanceBody.defaultBody());
         trioOpenFinance.pay_in();
         showAgoraURL(trioOpenFinance.getId());
+        trioOpenFinance.callback();
     }
 }

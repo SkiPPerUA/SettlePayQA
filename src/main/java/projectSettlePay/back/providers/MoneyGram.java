@@ -16,6 +16,11 @@ public class MoneyGram extends ProvidersMethods implements Pay_out{
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    @Override
     public int getCore() {
         return core;
     }

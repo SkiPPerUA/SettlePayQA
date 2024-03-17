@@ -14,6 +14,11 @@ public class DCM extends ProvidersMethods implements Pay_in {
         this.body = body;
     }
 
+    @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
     public void pay_in(){
         create(this);
     }

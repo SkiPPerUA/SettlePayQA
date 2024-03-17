@@ -22,6 +22,11 @@ public class TrioOpenFinance extends ProvidersMethods implements Pay_in {
     }
 
     @Override
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    @Override
     public IFrame getFrame() {
         return frame;
     }
@@ -58,43 +63,10 @@ public class TrioOpenFinance extends ProvidersMethods implements Pay_in {
         return conn;
     }
 
-    public void callback(boolean pay_in, String status){
+    public void callback(){
         Callback callback = new Callback();
-        String bodyCallback;
-        if (pay_in){
-            bodyCallback = "{\n" +
-                    "  \"webhook_response\": {\n" +
-                    "    \"event_type\": \"TRANSACTION\",\n" +
-                    "    \"data\": {\n" +
-                    "      \"transaction_id\": \"1646338380\",\n" +
-                    "      \"order_id\": \""+id+"\",\n" +
-                    "      \"app_id\": \"APP_SAHSEAOCSItlax3148\",\n" +
-                    "      \"transaction_amount\": \"99.0\",\n" +
-                    "      \"status\": \"%s\",\n" +
-                    "      \"bank_rrn\": \"326541980489\",\n" +
-                    "      \"bank_res_msg\": \"Order Created\",\n" +
-                    "      \"payment_method\": \"UPI\"\n" +
-                    "    }\n" +
-                    "  }\n" +
-                    "}";
-        }else {
-            bodyCallback = "{\n" +
-                    "  \"webhook_response\": {\n" +
-                    "    \"event_type\": \"PAYOUT\",\n" +
-                    "    \"data\": {\n" +
-                    "      \"payout_id\": \"U97001742171\",\n" +
-                    "      \"ref_id\": \""+id+"\",\n" +
-                    "      \"app_id\": \"APP_SAHSEAOCSItlax3148\",\n" +
-                    "      \"payout_amount\": \"1.00\",\n" +
-                    "      \"status\": \"%s\",\n" +
-                    "      \"bank_rrn\": \"326541980489\",\n" +
-                    "      \"bank_res_msg\": \"Transaction SUCCESS\",\n" +
-                    "      \"payment_method\": \"UPI\"\n" +
-                    "    }\n" +
-                    "  }\n" +
-                    "}";
-        }
-        callback.makeCallback("https://pay-stage-"+core+".backofficeweb.info/api/public/connector-stage-"+conn+"/callback/static-callback/payzeasy",String.format(bodyCallback,status));
+        String bodyCallback = "{\"external_id\": \""+getChildId()+"\", \"category\": \"collecting_document\", \"type\": \"settled\"}";
+        callback.makeCallback("https://pay-forms-stage.backofficeweb.info/api/public/connector-stage-"+conn+"/callback/static-callback/trio",bodyCallback);
     }
 
     public static class TrioOpenFinanceBody{
