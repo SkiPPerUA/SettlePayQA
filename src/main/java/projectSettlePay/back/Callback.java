@@ -21,17 +21,19 @@ public class Callback implements TransInfoHelper {
     private String env = "pay-forms-stage";
 
     public String getResult_url(IProviders provider){
+        return getResult_url(provider.getCore(),provider.getConn(),provider.getId());
+    }
+
+    public String getResult_url(int core, int conn, String transId){
         String result_url = "";
         try {
             Thread.sleep(2000);
             dataBase = new DataBase(CONN_STAGE_1);
-            ResultSet resultSet = dataBase.selectSql("SELECT x.transaction_uuid FROM public.transactions x WHERE external_transaction_id = '"+getChildId(provider.getId())+"'");
+            ResultSet resultSet = dataBase.selectSql("SELECT x.transaction_uuid FROM public.transactions x WHERE external_transaction_id = '"+getChildId(transId)+"'");
             resultSet.next();
-            result_url = "https://"+env+"-"+provider.getCore()+".backofficeweb.info/api/public/connector-stage-"+provider.getConn()+"/callback/dynamic-callback/"+resultSet.getString("transaction_uuid");
-        }catch (Throwable e){
+            result_url = "https://"+env+"-"+core+".backofficeweb.info/api/public/connector-stage-"+conn+"/callback/dynamic-callback/"+resultSet.getString("transaction_uuid");
+        } catch (Throwable e) {
             logger.error(e);
-        }finally {
-            dataBase.closeConn();
         }
         return result_url;
     }

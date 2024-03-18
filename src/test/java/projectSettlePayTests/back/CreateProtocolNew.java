@@ -66,6 +66,7 @@ public class CreateProtocolNew extends BaseTest {
             "}";
 
 
+    int provider_credential_id = 5451;
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
     ILogicServices servicesProtocol = new AquairingLogic();
     int providers_id = 5451;
@@ -75,29 +76,19 @@ public class CreateProtocolNew extends BaseTest {
     boolean pay_in = true;
 
     public void makeConnector() throws SQLException {
-        // добавить протокол ид из МД файла в public.providers x (конектор)
+        // добавить протокол ид и схему из МД файла в public.providers x (конектор)
         protocol.connector_protocolId(protocol_id,provider_services$name);
         protocol.add_schema(schema,provider_services$name);
+        //создаем-связку протокола
         protocol.protocol_id(protocol_versions$path);
         System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
+        //добавить запись в providers - сказать имя+protocol_id из protocol_versions + ссылку на стейдж Коннектора + id из providersКонектора = получаю providers ид
 
     }
-
-    public void update_connector_protocolId(){
-        //обновляю запись в providers - provider_credentials_id (конектор)
-        protocol.change_connector_protocolId(1343,protocol_id);
-    }
-
-//    public void getProtocolID() throws SQLException {
-//        //создаем-связку протокола
-//        protocol.protocol_id(protocol_versions$path);
-//        makeConnector();
-//        System.out.println(String.format("Имя - %s%nProtocol_id - %s%nConnector_id - %s",protocol_versions$path.replace("protocols.","")+"_"+provider_services$name,protocol.getProtocol_versions$id(),protocol.getConnector_Id()));
-//    }
-
-    //добавить запись в providers - сказать имя+protocol_id из protocol_versions + ссылку на стейдж Коннектора + id из providersКонектора = получаю providers ид
 
     public void makeProtocol() throws SQLException {
+        //обновляю запись в providers - provider_credentials_id (конектор)
+        protocol.change_connector_protocolId(provider_credential_id,protocol_id);
 
         protocol.provider_services(providers_id, provider_services$name, provider_services$currency, true);
 
