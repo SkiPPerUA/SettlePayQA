@@ -19,6 +19,12 @@ public class PayPortHPPframe extends FrameActivity implements IFrame{
         new GUIButton(new Locator().xpath("//div[@class='blockFormBodyBtn d-flex justify-content-between']/button[contains(@class,'btn-confirm')]")).click();
     }
 
+    public void positiveStepsPayOut() {
+        new GUITextBox(new Locator().xpath("//input[@id=\"message\"]")).addText("80933994455");
+        new GUITextBox(new Locator().xpath("//input[@id=\"payment_info\"]")).addText("Vlad test");
+        submit();
+    }
+
     public void cancelSteps() {
         steps();
         new GUIButton(new Locator().xpath("//button[contains(@class,'btn-cancel')]")).click();

@@ -14,8 +14,8 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
-    int protocol_id = 157;
-    String provider_services$name = "Payport_PayIn_HPP";
+    int protocol_id = 161;
+    String provider_services$name = "Payport_PayOut_HPP";
     String schema = "{\n" +
             "    \"schema\": [\n" +
             "        {\n" +
@@ -33,10 +33,10 @@ public class CreateProtocolNew extends BaseTest {
             "            \"value\": \"\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"expired_secs\",\n" +
-            "            \"name\": \"expired_secs\",\n" +
+            "            \"label\": \"exact_currency\",\n" +
+            "            \"name\": \"exact_currency\",\n" +
             "            \"required\": false,\n" +
-            "            \"type\": \"int\"\n" +
+            "            \"type\": \"boolean\"\n" +
             "        },\n" +
             "        {\n" +
             "            \"label\": \"currency2currency\",\n" +
@@ -45,10 +45,10 @@ public class CreateProtocolNew extends BaseTest {
             "            \"type\": \"boolean\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"client_expense\",\n" +
-            "            \"name\": \"client_expense\",\n" +
+            "            \"label\": \"merchant_expense\",\n" +
+            "            \"name\": \"merchant_expense\",\n" +
             "            \"required\": false,\n" +
-            "            \"type\": \"number\"\n" +
+            "            \"type\": \"int\"\n" +
             "        },\n" +
             "        {\n" +
             "            \"label\": \"Expired Minutes\",\n" +
@@ -66,14 +66,14 @@ public class CreateProtocolNew extends BaseTest {
             "}";
 
 
-    int provider_credential_id = 5451;
+    int provider_credential_id = 1378;
     String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
     ILogicServices servicesProtocol = new AquairingLogic();
-    int providers_id = 5451;
+    int providers_id = 5556;
     String provider_services$currency = "BDT";
-    String gateway_logic = "logics.services.wallet_topup_via_provider_form.v1.logic";
+    String gateway_logic = "logics.services.wallet_topup_via_provider_form_h2h_lite.v1.logic";
     String stage = "6";
-    boolean pay_in = true;
+    boolean pay_in = false;
 
     public void makeConnector() throws SQLException {
         // добавить протокол ид и схему из МД файла в public.providers x (конектор)

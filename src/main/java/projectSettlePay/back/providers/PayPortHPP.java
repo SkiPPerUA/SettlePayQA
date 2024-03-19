@@ -9,7 +9,7 @@ import projectSettlePay.helper.UuidGenerate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PayPortHPP extends ProvidersMethods implements Pay_in {
+public class PayPortHPP extends ProvidersMethods implements Pay_in, Pay_out {
 
     private int core = 6;
     private int conn = 6;
@@ -105,30 +105,60 @@ public class PayPortHPP extends ProvidersMethods implements Pay_in {
         return conn;
     }
 
+    @Override
+    public void pay_out() {
+        create(this);
+    }
+
     public static class PayPortHPPBody{
-        public static String defaultBody(){
-            return "{\n" +
-                    "    \"auth\": {\n" +
-                    "        \"debug\": true,\n" +
-                    "        \"point\": 2757,\n" +
-                    "        \"key\": 1,\n" +
-                    "        \"hash\": \"73fa095174d9e9653f7f4b203d6fe122\"\n" +
-                    "    },\n" +
-                    "    \"locale\": \"ua\",\n" +
-                    "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
-                    "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"account_id\": 2763,\n" +
-                    "    \"wallet_id\": 3806,\n" +
-                    "    \"service_id\": 4379,\n" +
-                    "    \"amount\": 30000,\n" +
-                    "    \"amount_currency\": \"BDT\",\n" +
-                    "    \"fields\": {\n" +
-                    "         \"email\":\"cadfa@fdas.das\",\n" +
-                    "         \"first_name\":\"name\",\n" +
-                    "         \"last_name\":\"last\"\n" +
-                    "    }\n" +
-                    "}";
+        public static String defaultBody(boolean pay_in) {
+            if (pay_in) {
+                return "{\n" +
+                        "    \"auth\": {\n" +
+                        "        \"debug\": true,\n" +
+                        "        \"point\": 2757,\n" +
+                        "        \"key\": 1,\n" +
+                        "        \"hash\": \"73fa095174d9e9653f7f4b203d6fe122\"\n" +
+                        "    },\n" +
+                        "    \"locale\": \"ua\",\n" +
+                        "    \"external_order_id\": \"12345673489011\",\n" +
+                        "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                        "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                        "    \"account_id\": 2763,\n" +
+                        "    \"wallet_id\": 3806,\n" +
+                        "    \"service_id\": 4379,\n" +
+                        "    \"amount\": 30000,\n" +
+                        "    \"amount_currency\": \"BDT\",\n" +
+                        "    \"fields\": {\n" +
+                        "         \"email\":\"cadfa@fdas.das\",\n" +
+                        "         \"first_name\":\"name\",\n" +
+                        "         \"last_name\":\"last\"\n" +
+                        "    }\n" +
+                        "}";
+            }else {
+                return "{\n" +
+                        "    \"auth\": {\n" +
+                        "        \"debug\": true,\n" +
+                        "        \"point\": 2757,\n" +
+                        "        \"key\": 1,\n" +
+                        "        \"hash\": \"73fa095174d9e9653f7f4b203d6fe122\"\n" +
+                        "    },\n" +
+                        "    \"locale\": \"en\",\n" +
+                        "    \"external_order_id\": \"954345387\",\n" +
+                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"customer_ip_address\": \"0.0.0.0\",\n" +
+                        "    \"account_id\": 2763,\n" +
+                        "    \"wallet_id\": 3806,\n" +
+                        "    \"service_id\": 4412,\n" +
+                        "    \"amount\": 50000,\n" +
+                        "    \"amount_currency\": \"BDT\",\n" +
+                        "     \"fields\": {\n" +
+                        "        \"email\": \"cadfa@fdas.das\",\n" +
+                        "        \"first_name\": \"name\",\n" +
+                        "        \"last_name\": \"last\"\n" +
+                        "    } \n" +
+                        "}";
+            }
         }
     }
 

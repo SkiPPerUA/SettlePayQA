@@ -4,10 +4,11 @@ import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeMethod;
 import projectSettlePay.core.DataBase;
 import projectSettlePay.helper.TestCases;
+import projectSettlePay.helper.TransInfoHelper;
 
 import java.lang.reflect.Method;
 
-public abstract class BaseTest implements DataBase.DataBaseName, TestCases {
+public abstract class BaseTest implements DataBase.DataBaseName, TestCases, TransInfoHelper {
 
     protected static Logger logger = Logger.getLogger("Test");
 
@@ -39,8 +40,7 @@ public abstract class BaseTest implements DataBase.DataBaseName, TestCases {
     }
 
     protected String getAgoraURL(String trans_id){
-        long child = Long.valueOf(trans_id) + 1;
-        return "https://preprod-agora2.backofficeweb.info/transactions/transactions/"+child;
+        return "https://preprod-agora2.backofficeweb.info/transactions/transactions/"+getChildId(trans_id);
     }
 
     protected void showAgoraURL(String trans_id){

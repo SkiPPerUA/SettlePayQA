@@ -84,7 +84,7 @@ abstract class ProvidersMethods implements TransInfoHelper {
         response = given()
                 .contentType(ContentType.JSON)
                 .body(provider.getBody())
-                .when().log().all()
+                .when()
                 .post(urlRequest);
         logger.info("Pay - "+ getResponse());
         try {

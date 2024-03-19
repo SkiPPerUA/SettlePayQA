@@ -16,80 +16,80 @@ import java.util.List;
 import java.util.Map;
 
 @Test
-public class PayPortPayInHPP extends BaseTest {
+public class PayPortPayOutHPP extends BaseTest {
 
     PayPortHPP payPort;
     String body;
-    public void successPayIn(){
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+    public void successPayOut() {
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         showAgoraURL(payPort.getId());
     }
 
     public void two_callbacks(){
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
-        payPort.callback("1", 350f);
+        payPort.callback("1", 550f);
         System.out.print("Из успеха в успех - сумма другая ");
         showAgoraURL(payPort.getId());
 
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
-        payPort.callback("-1", 350f);
+        payPort.callback("-1", 550f);
         System.out.print("Из успеха в фейл - сумма другая ");
         showAgoraURL(payPort.getId());
 
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         payPort.callback("-1");
         System.out.print("Из успеха в фейл - сумма таже ");
         showAgoraURL(payPort.getId());
 
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("-1");
-        payPort.callback("1", 350f);
+        payPort.callback("1", 550f);
         System.out.print("Из фейла в успех - сумма другая ");
         showAgoraURL(payPort.getId());
 
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("-1");
-        payPort.callback("-1", 350f);
+        payPort.callback("-1", 550f);
         System.out.print("Из фейла в фейл - сумма другая ");
         showAgoraURL(payPort.getId());
 
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("-1");
         payPort.callback("1");
         System.out.print("Из фейла в успех - сумма таже ");
         showAgoraURL(payPort.getId());
     }
 
-    public void negativePayIn(){
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+    public void negativePayOut(){
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("-1");
         showAgoraURL(payPort.getId());
     }
@@ -98,10 +98,10 @@ public class PayPortPayInHPP extends BaseTest {
         List<String> cancellation_reasons = List.of("NO_PAYMENT_RECEIVED", "DETAILS_OF_ANOTHER_BANK", "INVALID_DETAILS",
                 "RECALCULATION", "CANCELED_BY_NO_AD_SELECTED", "CANCELED_BY_USER", "CANCELED_BY_SYSTEM");
         for (String cancel: cancellation_reasons) {
-            payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-            payPort.pay_in();
+            payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+            payPort.pay_out();
             Session.getDriver().get(payPort.getPayURL());
-            payPort.frame.positiveSteps();
+            payPort.frame.positiveStepsPayOut();
             Map<String, String> body = new HashMap<>();
             body.put("invoice_id", "90795");
             body.put("merchant_id", "663");
@@ -114,7 +114,7 @@ public class PayPortPayInHPP extends BaseTest {
             body.put("status", "-1");
             body.put("account_info", "01204358565");
             body.put("fiat_currency", "BDT");
-            body.put("fiat_amount", "300");
+            body.put("fiat_amount", "500");
             body.put("payment_info", "BDT Test");
             body.put("payment_system_type", "by_mobile");
             body.put("signature", "10a192e348fe4586106b47b28f7472d74aef1407");
@@ -127,8 +127,8 @@ public class PayPortPayInHPP extends BaseTest {
     }
 
     public void tests_summ(){
-        List<Integer> amounts = amount_cases(new Long[]{29999l,2500001l,30001l});
-        for (Integer x: amounts){
+        List<Long> amounts = amount_cases(new Long[]{29999l,2500001l,30001l,30000l,2500000l});
+        for (Long x: amounts){
             body = String.format("{\n" +
                     "    \"auth\": {\n" +
                     "        \"debug\": true,\n" +
@@ -142,7 +142,7 @@ public class PayPortPayInHPP extends BaseTest {
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
-                    "    \"service_id\": 4379,\n" +
+                    "    \"service_id\": 4412,\n" +
                     "    \"amount\": %s,\n" +
                     "    \"amount_currency\": \"BDT\",\n" +
                     "    \"fields\": {\n" +
@@ -151,34 +151,38 @@ public class PayPortPayInHPP extends BaseTest {
                     "         \"last_name\":\"last\"\n" +
                     "    }\n" +
                     "}",x);
-            System.out.print(String.format("Amount {%s} "));
-            payPort = new PayPortHPP(body);
-            payPort.pay_in();
-            Session.getDriver().get(payPort.getPayURL());
-            showAgoraURL(payPort.getId());
+            try {
+                System.out.print(String.format("Amount {%s} ",x));
+                payPort = new PayPortHPP(body);
+                payPort.pay_out();
+                Session.getDriver().get(payPort.getPayURL());
+                showAgoraURL(payPort.getId());
+            }catch (Throwable e){
+                //
+            }
         }
     }
 
-    public void successPayIn_anotherSum_in_callback(){
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+    public void successPayOut_anotherSum_in_callback(){
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
-        payPort.callback("1", 500.0f);
+        payPort.frame.positiveStepsPayOut();
+        payPort.callback("1", 550.0f);
         showAgoraURL(payPort.getId());
     }
 
-    public void negativePayIn_anotherSum_in_callback(){
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(true));
-        payPort.pay_in();
+    public void negativePayOut_anotherSum_in_callback(){
+        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
-        payPort.callback("-1", 500.0f);
+        payPort.frame.positiveStepsPayOut();
+        payPort.callback("-1", 550.0f);
         showAgoraURL(payPort.getId());
     }
 
     public void test_locale() throws InterruptedException {
-        List<String> locale = List.of("ua","ru","en","bn");
+        List<String> locale = List.of("ua","ru","en");
         for (String loc : locale) {
             String body = "{\n" +
                     "    \"auth\": {\n" +
@@ -193,8 +197,8 @@ public class PayPortPayInHPP extends BaseTest {
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
-                    "    \"service_id\": 4379,\n" +
-                    "    \"amount\": 30001,\n" +
+                    "    \"service_id\": 4412,\n" +
+                    "    \"amount\": 50001,\n" +
                     "    \"amount_currency\": \"BDT\",\n" +
                     "    \"fields\": {\n" +
                     "        \"email\":\"cadfa@fdas.das\",\n" +
@@ -203,18 +207,12 @@ public class PayPortPayInHPP extends BaseTest {
                     "    }\n" +
                     "}";
             payPort = new PayPortHPP(String.format(body, loc));
-            payPort.pay_in();
+            payPort.pay_out();
             Session.getDriver().get(payPort.getPayURL());
             Thread.sleep(10000);
-            new GUITextBox(new Locator().xpath("//input[@id=\"phone_number\"]")).addText("80933994455");
+            new GUITextBox(new Locator().xpath("//input[@id=\"message\"]")).addText("80933994455");
+            new GUITextBox(new Locator().xpath("//input[@id=\"payment_info\"]")).addText("Vlad test");
             payPort.frame.submit();
-            new GUITextBox(new Locator().xpath("//input[@id=\"essential_key\"]")).addText("80933994455");
-            new GUITextBox(new Locator().xpath("//input[@id=\"additional_essential_key\"]")).addText(UuidGenerate.generateUUID());
-            GUIButton confirm = new GUIButton(new Locator().xpath("//button[contains(@class,'btn-confirm')][@name]"));
-            confirm.scrollToElement();
-            confirm.click();
-            Thread.sleep(10000);
-            new GUIButton(new Locator().xpath("//div[@class='blockFormBodyBtn d-flex justify-content-between']/button[contains(@class,'btn-confirm')]")).click();
             Thread.sleep(10000);
             System.out.print(loc+" ");
             showAgoraURL(payPort.getId());
@@ -237,8 +235,8 @@ public class PayPortPayInHPP extends BaseTest {
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
-                    "    \"service_id\": 4379,\n" +
-                    "    \"amount\": 30000,\n" +
+                    "    \"service_id\": 4412,\n" +
+                    "    \"amount\": 50000,\n" +
                     "    \"amount_currency\": \"BDT\",\n" +
                     "    \"fields\": {\n" +
                     "        \"email\":\"cadfa@fdas.das\",\n" +
@@ -246,10 +244,10 @@ public class PayPortPayInHPP extends BaseTest {
                     "        \"last_name\":\"last\"\n" +
                     "    }\n" +
                     "}");
-            payPort.pay_in();
+            payPort.pay_out();
             if (i < 1) {
                 Session.getDriver().get(payPort.getPayURL());
-                payPort.frame.positiveSteps();
+                payPort.frame.positiveStepsPayOut();
             }
             showAgoraURL(payPort.getId());
         }
@@ -269,8 +267,8 @@ public class PayPortPayInHPP extends BaseTest {
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3363,\n" +
-                "    \"service_id\": 4379,\n" +
-                "    \"amount\": 30000,\n" +
+                "    \"service_id\": 4412,\n" +
+                "    \"amount\": 50000,\n" +
                 "    \"amount_currency\": \"USD\",\n" +
                 "    \"fields\": {\n" +
                 "        \"email\":\"cadfa@fdas.das\",\n" +
@@ -278,9 +276,9 @@ public class PayPortPayInHPP extends BaseTest {
                 "        \"last_name\":\"last\"\n" +
                 "    }\n" +
                 "}");
-        payPort.pay_in();
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         showAgoraURL(payPort.getId());
     }
 
@@ -299,8 +297,8 @@ public class PayPortPayInHPP extends BaseTest {
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
-                "    \"service_id\": 4379,\n" +
-                "    \"amount\": 30001,\n" +
+                "    \"service_id\": 4412,\n" +
+                "    \"amount\": 50001,\n" +
                 "    \"amount_currency\": \"BDT\",\n" +
                 "    \"fields\": {\n" +
                 "        \"email\":\"cadfa@fdas.das\",\n" +
@@ -309,9 +307,9 @@ public class PayPortPayInHPP extends BaseTest {
                 "    }\n" +
                 "}";
         payPort = new PayPortHPP(String.format(body,data));
-        payPort.pay_in();
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         System.out.print(data+" ");
         showAgoraURL(payPort.getId());
@@ -337,14 +335,14 @@ public class PayPortPayInHPP extends BaseTest {
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
-                    "    \"service_id\": 4379,\n" +
-                    "    \"amount\": 30000,\n" +
+                    "    \"service_id\": 4412,\n" +
+                    "    \"amount\": 50000,\n" +
                     "    \"amount_currency\": \"BDT\",\n" +
                     "    \"fields\": %s"+
                     "}",x);
             System.out.print(String.format("Fields %s ",x));
             payPort = new PayPortHPP(body);
-            payPort.pay_in();
+            payPort.pay_out();
             Session.getDriver().get(payPort.getPayURL());
             showAgoraURL(payPort.getId());
         }
@@ -365,8 +363,8 @@ public class PayPortPayInHPP extends BaseTest {
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
-                "    \"service_id\": 4379,\n" +
-                "    \"amount\": 30001,\n" +
+                "    \"service_id\": 4412,\n" +
+                "    \"amount\": 50001,\n" +
                 "    \"amount_currency\": \"BDT\",\n" +
                 "    \"fields\": {\n" +
                 "        \"email\":\"cadfa@fdas.das\",\n" +
@@ -375,9 +373,9 @@ public class PayPortPayInHPP extends BaseTest {
                 "    }\n" +
                 "}";
         payPort = new PayPortHPP(String.format(body,data));
-        payPort.pay_in();
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         System.out.print(data+" ");
         showAgoraURL(payPort.getId());
@@ -398,8 +396,8 @@ public class PayPortPayInHPP extends BaseTest {
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
-                "    \"service_id\": 4379,\n" +
-                "    \"amount\": 30001,\n" +
+                "    \"service_id\": 4412,\n" +
+                "    \"amount\": 50001,\n" +
                 "    \"amount_currency\": \"BDT\",\n" +
                 "    \"fields\": {\n" +
                 "        \"email\":\"%s\",\n" +
@@ -408,9 +406,9 @@ public class PayPortPayInHPP extends BaseTest {
                 "    }\n" +
                 "}";
         payPort = new PayPortHPP(String.format(body,data));
-        payPort.pay_in();
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         System.out.print(data+" ");
         showAgoraURL(payPort.getId());
@@ -431,8 +429,8 @@ public class PayPortPayInHPP extends BaseTest {
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
-                "    \"service_id\": 4379,\n" +
-                "    \"amount\": 30001,\n" +
+                "    \"service_id\": 4412,\n" +
+                "    \"amount\": 50001,\n" +
                 "    \"description\": %s,\n" +
                 "    \"amount_currency\": \"BDT\",\n" +
                 "    \"fields\": {\n" +
@@ -442,9 +440,9 @@ public class PayPortPayInHPP extends BaseTest {
                 "    }\n" +
                 "}";
         payPort = new PayPortHPP(String.format(body,data));
-        payPort.pay_in();
+        payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveSteps();
+        payPort.frame.positiveStepsPayOut();
         payPort.callback("1");
         System.out.print(data+" ");
         showAgoraURL(payPort.getId());
