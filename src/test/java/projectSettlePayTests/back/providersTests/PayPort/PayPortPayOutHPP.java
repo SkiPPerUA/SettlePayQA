@@ -21,12 +21,15 @@ public class PayPortPayOutHPP extends BaseTest {
     PayPortHPP payPort;
     String body;
     public void successPayOut() {
-        payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
-        payPort.pay_out();
-        Session.getDriver().get(payPort.getPayURL());
-        payPort.frame.positiveStepsPayOut();
-        payPort.callback("1");
-        showAgoraURL(payPort.getId());
+        try {
+            payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
+            payPort.pay_out();
+            Session.getDriver().get(payPort.getPayURL());
+            payPort.frame.positiveStepsPayOut();
+            payPort.callback("1");
+        }finally {
+            showAgoraURL(payPort.getId());
+        }
     }
 
     public void two_callbacks(){
@@ -85,7 +88,7 @@ public class PayPortPayOutHPP extends BaseTest {
         showAgoraURL(payPort.getId());
     }
 
-    public void negativePayOut(){
+    public void negativePayOut() {
         payPort = new PayPortHPP(PayPortHPP.PayPortHPPBody.defaultBody(false));
         payPort.pay_out();
         Session.getDriver().get(payPort.getPayURL());
@@ -266,10 +269,10 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
-                "    \"wallet_id\": 3363,\n" +
+                "    \"wallet_id\": 3228,\n" +
                 "    \"service_id\": 4412,\n" +
                 "    \"amount\": 50000,\n" +
-                "    \"amount_currency\": \"USD\",\n" +
+                "    \"amount_currency\": \"UAH\",\n" +
                 "    \"fields\": {\n" +
                 "        \"email\":\"cadfa@fdas.das\",\n" +
                 "        \"first_name\":\"name\",\n" +
