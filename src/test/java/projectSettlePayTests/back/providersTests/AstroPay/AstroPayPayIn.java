@@ -9,8 +9,7 @@ import projectSettlePay.back.TransInfoConn;
 import projectSettlePay.back.TransInfoCore;
 import projectSettlePay.back.providers.AstroPay;
 import projectSettlePay.core.Session;
-import projectSettlePay.helper.Data;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -339,8 +338,8 @@ public class AstroPayPayIn extends BaseTest {
                 "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
-                "    \"external_order_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                "    \"external_order_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2765,\n" +
                 "    \"wallet_id\": %s,\n" +

@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
 import projectSettlePay.back.providers.P2Pay;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 @Test
 public class P2PayH2H_test extends BaseTest {
@@ -170,7 +170,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +
@@ -236,7 +236,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +
@@ -303,7 +303,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +
@@ -330,7 +330,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +
@@ -396,7 +396,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +
@@ -463,7 +463,7 @@ public class P2PayH2H_test extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 2529,\n" +
                 "    \"service_id\": 3516,\n" +

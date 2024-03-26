@@ -2,7 +2,7 @@ package projectSettlePay.back.providers;
 
 import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -98,7 +98,7 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"external_customer_id\": \""+ UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+ BodyHelper.generateUUID()+"\",\n" +
                         "    \"account_id\": 2761,\n" +
                         "    \"wallet_id\": 2529,\n" +
                         "    \"service_id\": 3516,\n" +
@@ -119,7 +119,7 @@ public class P2Pay extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
                         "    \"external_order_id\": \"954345387\",\n" +
-                        "    \"external_customer_id\":  \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\":  \""+BodyHelper.generateUUID()+"\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2761,\n" +
                         "    \"wallet_id\": 2529,\n" +

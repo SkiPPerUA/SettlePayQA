@@ -3,7 +3,6 @@ package projectSettlePay.back.providers;
 import projectSettlePay.back.Callback;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.front.P2PFrame;
-import projectSettlePay.helper.UuidGenerate;
 
 public class TrioOpenFinance extends ProvidersMethods implements Pay_in {
 

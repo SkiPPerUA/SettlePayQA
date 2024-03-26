@@ -3,7 +3,7 @@ package projectSettlePay.back.providers;
 import org.testng.Assert;
 import projectSettlePay.front.AcquiringFrame;
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class Asquard extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -94,7 +94,7 @@ public class Asquard extends ProvidersMethods implements Pay_in, Pay_out {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"external_order_id\": \"100\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 4,\n" +
                     "    \"wallet_id\": 184,\n" +
@@ -136,7 +136,7 @@ public class Asquard extends ProvidersMethods implements Pay_in, Pay_out {
                         "        \"hash\": \"23890751a791b6936b547972fc0cde42\"\n" +
                         "    },\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                        "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                         "    \"locale\": \"en\",\n" +
                         "    \"account_id\": 2761,\n" +
                         "    \"wallet_id\": 2595,\n" +

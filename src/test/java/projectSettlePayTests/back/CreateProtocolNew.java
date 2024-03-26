@@ -14,43 +14,30 @@ import java.sql.SQLException;
 @Test
 public class CreateProtocolNew extends BaseTest {
     Protocol protocol = new Protocol();
-    int protocol_id = 161;
-    String provider_services$name = "Payport_PayOut_HPP";
+    int protocol_id = 160;
+    String provider_services$name = "Getapay_pay_out";
     String schema = "{\n" +
             "    \"schema\": [\n" +
             "        {\n" +
-            "            \"label\": \"base_url\",\n" +
+            "            \"label\": \"Base Url\",\n" +
             "            \"name\": \"base_url\",\n" +
             "            \"required\": true,\n" +
             "            \"type\": \"text\",\n" +
-            "            \"value\": \"\"\n" +
+            "            \"placeholder\": \"https://...\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"merchant_api_key\",\n" +
-            "            \"name\": \"merchant_api_key\",\n" +
+            "            \"label\": \"Project Id\",\n" +
+            "            \"name\": \"project_id\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"text\",\n" +
-            "            \"value\": \"\"\n" +
+            "            \"type\": \"text\"\n" +
             "        },\n" +
             "        {\n" +
-            "            \"label\": \"exact_currency\",\n" +
-            "            \"name\": \"exact_currency\",\n" +
-            "            \"required\": false,\n" +
-            "            \"type\": \"boolean\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "            \"label\": \"currency2currency\",\n" +
-            "            \"name\": \"currency2currency\",\n" +
+            "            \"label\": \"Secret Key\",\n" +
+            "            \"name\": \"secret_key\",\n" +
             "            \"required\": true,\n" +
-            "            \"type\": \"boolean\"\n" +
+            "            \"type\": \"text\"\n" +
             "        },\n" +
-            "        {\n" +
-            "            \"label\": \"merchant_expense\",\n" +
-            "            \"name\": \"merchant_expense\",\n" +
-            "            \"required\": false,\n" +
-            "            \"type\": \"int\"\n" +
-            "        },\n" +
-            "        {\n" +
+            "         {\n" +
             "            \"label\": \"Expired Minutes\",\n" +
             "            \"name\": \"expired_minutes\",\n" +
             "            \"required\": false,\n" +
@@ -66,13 +53,13 @@ public class CreateProtocolNew extends BaseTest {
             "}";
 
 
-    int provider_credential_id = 1378;
-    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_acquiring";
-    ILogicServices servicesProtocol = new AquairingLogic();
-    int providers_id = 5556;
-    String provider_services$currency = "BDT";
-    String gateway_logic = "logics.services.wallet_topup_via_provider_form_h2h_lite.v1.logic";
-    String stage = "6";
+    int provider_credential_id = 1411;
+    String protocol_versions$path = "protocols.ProviderConnector.v1.protocol_payout";
+    ILogicServices servicesProtocol = new H2HLogic();
+    int providers_id = 5561;
+    String provider_services$currency = "INR";
+    String gateway_logic = "logics.services.default_service.v1.logic";
+    String stage = "7";
     boolean pay_in = false;
 
     public void makeConnector() throws SQLException {

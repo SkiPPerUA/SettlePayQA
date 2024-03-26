@@ -3,7 +3,7 @@ package projectSettlePay.back.providers;
 import projectSettlePay.back.Callback;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.front.P2PFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class TrioPIX extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -111,7 +111,7 @@ public class TrioPIX extends ProvidersMethods implements Pay_in, Pay_out {
                         "    \"wallet_id\": 3621,\n" +
                         "    \"service_id\": 4305,\n" +
                         "    \"amount\": 5,\n" +
-                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                         "    \"amount_currency\": \"BRL\",\n" +
                         "    \"fields\": {\n" +
                         "        \"pix_key\": \"dded141e-dee1-4eda-9f2b-ba24fa55f1c3\"\n" +

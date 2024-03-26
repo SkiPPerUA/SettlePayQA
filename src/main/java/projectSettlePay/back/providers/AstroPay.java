@@ -2,7 +2,7 @@ package projectSettlePay.back.providers;
 
 import projectSettlePay.front.AstroPayFrame;
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class AstroPay extends ProvidersMethods implements Pay_in {
 
@@ -81,8 +81,8 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
-                        "    \"external_order_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
-                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_order_id\": \""+BodyHelper.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2765,\n" +
                         "    \"wallet_id\": 3015,\n" +
@@ -111,8 +111,8 @@ public class AstroPay extends ProvidersMethods implements Pay_in {
                         "        \"hash\": \"e5a095b16b8a2106380686b23c5570ac\"\n" +
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
-                        "    \"external_order_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
-                        "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                        "    \"external_order_id\": \"" + BodyHelper.generateUUID() + "\",\n" +
+                        "    \"external_customer_id\": \"" + BodyHelper.generateUUID() + "\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2765,\n" +
                         "    \"wallet_id\": 3554,\n" +

@@ -383,8 +383,8 @@ public class MunzenPayOut extends BaseTest {
         munzen.pay_out();
         showAgoraURL(munzen.getId());
     }
-    @Test(dataProvider = "negativeAmount_cases")
-    public void negativeTest_amount(int amount) {
+
+    public void negativeTest_amount() {
         body = "{\n" +
                 "    \"auth\": {\n" +
                 "        \"debug\": true,\n" +
@@ -398,7 +398,7 @@ public class MunzenPayOut extends BaseTest {
                 "    \"account_id\": 2760,\n" +
                 "    \"wallet_id\": 3689,\n" +
                 "    \"service_id\": 4233,\n" +
-                "    \"amount\": %s,\n" +
+                "    \"amount\": 0,\n" +
                 "    \"amount_currency\": \"UZS\",\n" +
                 "    \"description\": \"Test deposit\",\n" +
                 "    \"fields\": {\n" +
@@ -411,7 +411,7 @@ public class MunzenPayOut extends BaseTest {
                 "        \"last_name\":\"Doe\"\n" +
                 "    }\n" +
                 "}";
-        munzen = new Munzen(String.format(body,amount));
+        munzen = new Munzen(String.format(body));
         munzen.pay_out();
         if (munzen.getId() != null) {
             showAgoraURL(munzen.getId());

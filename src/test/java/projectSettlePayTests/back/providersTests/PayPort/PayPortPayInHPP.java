@@ -8,8 +8,8 @@ import projectSettlePay.back.providers.PayPortHPP;
 import projectSettlePay.core.GUIButton;
 import projectSettlePay.core.GUITextBox;
 import projectSettlePay.core.Locator;
+import projectSettlePay.helper.BodyHelper;
 import projectSettlePay.core.Session;
-import projectSettlePay.helper.UuidGenerate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -138,7 +138,7 @@ public class PayPortPayInHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -189,7 +189,7 @@ public class PayPortPayInHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"%s\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                    "    \"external_customer_id\": \"" + BodyHelper.generateUUID() + "\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -209,7 +209,7 @@ public class PayPortPayInHPP extends BaseTest {
             new GUITextBox(new Locator().xpath("//input[@id=\"phone_number\"]")).addText("80933994455");
             payPort.frame.submit();
             new GUITextBox(new Locator().xpath("//input[@id=\"essential_key\"]")).addText("80933994455");
-            new GUITextBox(new Locator().xpath("//input[@id=\"additional_essential_key\"]")).addText(UuidGenerate.generateUUID());
+            new GUITextBox(new Locator().xpath("//input[@id=\"additional_essential_key\"]")).addText(BodyHelper.generateUUID());
             GUIButton confirm = new GUIButton(new Locator().xpath("//button[contains(@class,'btn-confirm')][@name]"));
             confirm.scrollToElement();
             confirm.click();
@@ -222,7 +222,7 @@ public class PayPortPayInHPP extends BaseTest {
     }
 
     public void negative_the_same_orderId(){
-        String external_customer_id = UuidGenerate.generateUUID();
+        String external_customer_id = BodyHelper.generateUUID();
         for (int i = 0; i < 2; i++) {
             payPort = new PayPortHPP("{\n" +
                     "    \"auth\": {\n" +
@@ -265,7 +265,7 @@ public class PayPortPayInHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3363,\n" +
@@ -295,7 +295,7 @@ public class PayPortPayInHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -333,7 +333,7 @@ public class PayPortPayInHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -361,7 +361,7 @@ public class PayPortPayInHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -394,7 +394,7 @@ public class PayPortPayInHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -427,7 +427,7 @@ public class PayPortPayInHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +

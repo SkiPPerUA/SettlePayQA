@@ -4,8 +4,7 @@ import projectSettlePay.back.Callback;
 import projectSettlePay.back.TransInfoCore;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.front.PayPortHPPframe;
-import projectSettlePay.helper.UuidGenerate;
-
+import projectSettlePay.helper.BodyHelper;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,7 +121,7 @@ public class PayPortHPP extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"ua\",\n" +
                         "    \"external_order_id\": \"12345673489011\",\n" +
-                        "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                        "    \"external_customer_id\": \"" + BodyHelper.generateUUID() + "\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2763,\n" +
                         "    \"wallet_id\": 3806,\n" +
@@ -145,7 +144,7 @@ public class PayPortHPP extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"en\",\n" +
                         "    \"external_order_id\": \"954345387\",\n" +
-                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                         "    \"account_id\": 2763,\n" +
                         "    \"wallet_id\": 3806,\n" +

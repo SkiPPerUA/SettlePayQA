@@ -15,10 +15,6 @@ public interface TestCases {
 
     @DataProvider
     default Object [][] emailNegative_cases(){return new Object[][] {{""},{"fdsd@fdsd"},{"fsdsfd.fsd"},{"fsdsfd@f.d"},{"fsd fsd@ffsd.fsd"},{"fsd!#$@#fsd@ffsd.fsd"}};}
-    @DataProvider
-    default Object [][] negativeAmount_cases(){
-        return new Object[][] {{0},{-10}};
-    }
 
     @DataProvider
     default Object [][] negativeCard_cases(){

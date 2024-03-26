@@ -2,7 +2,7 @@ package projectSettlePay.back.providers;
 
 import projectSettlePay.front.P2PFrame;
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class PayPort extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -100,7 +100,7 @@ public class PayPort extends ProvidersMethods implements Pay_in, Pay_out {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                    "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                     "    \"account_id\": 2761,\n" +
                     "    \"wallet_id\": 2529,\n" +
                     "    \"service_id\": 3966,\n" +

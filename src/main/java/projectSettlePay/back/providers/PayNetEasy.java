@@ -2,7 +2,7 @@ package projectSettlePay.back.providers;
 
 import projectSettlePay.front.FourBillFrame;
 import projectSettlePay.front.IFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class PayNetEasy extends ProvidersMethods implements Pay_in {
 
@@ -71,8 +71,8 @@ public class PayNetEasy extends ProvidersMethods implements Pay_in {
                     "        \"hash\": \"c9194644d4316e008a7afb0d50bf056b\"\n" +
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
-                    "    \"external_order_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_order_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 4,\n" +
                     "    \"wallet_id\": 118,\n" +

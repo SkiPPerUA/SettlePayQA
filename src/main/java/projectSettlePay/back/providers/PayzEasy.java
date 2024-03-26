@@ -3,7 +3,7 @@ package projectSettlePay.back.providers;
 import projectSettlePay.back.Callback;
 import projectSettlePay.front.IFrame;
 import projectSettlePay.front.P2PFrame;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class PayzEasy extends ProvidersMethods implements Pay_in, Pay_out {
 
@@ -124,7 +124,7 @@ public class PayzEasy extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"en\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                        "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                         "    \"account_id\": 2763,\n" +
                         "    \"wallet_id\": 3019,\n" +
                         "    \"service_id\": 3801,\n" +
@@ -143,7 +143,7 @@ public class PayzEasy extends ProvidersMethods implements Pay_in, Pay_out {
                         "    },\n" +
                         "    \"locale\": \"en\",\n" +
                         "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                        "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                        "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                         "    \"account_id\": 2763,\n" +
                         "    \"wallet_id\": 3019,\n" +
                         "    \"service_id\": 3802,\n" +

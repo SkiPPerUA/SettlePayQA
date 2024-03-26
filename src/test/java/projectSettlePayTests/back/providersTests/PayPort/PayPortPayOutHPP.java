@@ -5,11 +5,10 @@ import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
 import projectSettlePay.back.Callback;
 import projectSettlePay.back.providers.PayPortHPP;
-import projectSettlePay.core.GUIButton;
 import projectSettlePay.core.GUITextBox;
 import projectSettlePay.core.Locator;
 import projectSettlePay.core.Session;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -141,7 +140,7 @@ public class PayPortPayOutHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -196,7 +195,7 @@ public class PayPortPayOutHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"%s\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \"" + UuidGenerate.generateUUID() + "\",\n" +
+                    "    \"external_customer_id\": \"" + BodyHelper.generateUUID() + "\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -223,7 +222,7 @@ public class PayPortPayOutHPP extends BaseTest {
     }
 
     public void negative_the_same_orderId(){
-        String external_customer_id = UuidGenerate.generateUUID();
+        String external_customer_id = BodyHelper.generateUUID();
         for (int i = 0; i < 2; i++) {
             payPort = new PayPortHPP("{\n" +
                     "    \"auth\": {\n" +
@@ -266,7 +265,7 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3228,\n" +
@@ -296,7 +295,7 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -334,7 +333,7 @@ public class PayPortPayOutHPP extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"external_order_id\": \"12345673489011\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                     "    \"account_id\": 2763,\n" +
                     "    \"wallet_id\": 3806,\n" +
@@ -362,7 +361,7 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -395,7 +394,7 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +
@@ -428,7 +427,7 @@ public class PayPortPayOutHPP extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"external_order_id\": \"12345673489011\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
                 "    \"account_id\": 2763,\n" +
                 "    \"wallet_id\": 3806,\n" +

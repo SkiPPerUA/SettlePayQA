@@ -1,13 +1,9 @@
 package projectSettlePay.front;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import projectSettlePay.core.GUIButton;
 import projectSettlePay.core.GUITextBox;
 import projectSettlePay.core.Locator;
-import projectSettlePay.core.Session;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 public class PayPortHPPframe extends FrameActivity implements IFrame{
     @Override
@@ -34,6 +30,6 @@ public class PayPortHPPframe extends FrameActivity implements IFrame{
         new GUITextBox(new Locator().xpath("//input[@id=\"phone_number\"]")).addText("80933994455");
         submit();
         new GUITextBox(new Locator().xpath("//input[@id=\"essential_key\"]")).addText("80933994455");
-        new GUITextBox(new Locator().xpath("//input[@id=\"additional_essential_key\"]")).addText(UuidGenerate.generateUUID());
+        new GUITextBox(new Locator().xpath("//input[@id=\"additional_essential_key\"]")).addText(BodyHelper.generateUUID());
     }
 }

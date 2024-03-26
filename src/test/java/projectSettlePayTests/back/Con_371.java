@@ -5,14 +5,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
-
+import projectSettlePay.helper.BodyHelper;
 import static io.restassured.RestAssured.given;
 
 import io.restassured.response.*;
 import projectSettlePay.core.DataBase;
 import projectSettlePay.core.Session;
 import projectSettlePay.front.P2PFrame;
-import projectSettlePay.helper.UuidGenerate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -99,7 +98,7 @@ public class Con_371 extends BaseTest {
         }else {
             amm = Integer.getInteger(am);
         }
-        return String.format(body, UuidGenerate.generateUUID(), amm, curr);
+        return String.format(body, BodyHelper.generateUUID(), amm, curr);
     }
 
     public void test(){

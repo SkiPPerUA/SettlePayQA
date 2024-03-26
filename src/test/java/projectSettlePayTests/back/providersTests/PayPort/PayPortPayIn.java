@@ -10,7 +10,7 @@ import projectSettlePay.back.providers.PayPort;
 import projectSettlePay.core.GUIButton;
 import projectSettlePay.core.Locator;
 import projectSettlePay.core.Session;
-import projectSettlePay.helper.UuidGenerate;
+import projectSettlePay.helper.BodyHelper;
 
 @Test
 public class PayPortPayIn extends BaseTest {
@@ -66,7 +66,7 @@ public class PayPortPayIn extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID() +"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID() +"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 3433, \n" +
                 "    \"service_id\": 3966,\n" +
@@ -95,7 +95,7 @@ public class PayPortPayIn extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 3433,\n" +
                 "    \"service_id\": 3966,\n" +
@@ -163,7 +163,7 @@ public class PayPortPayIn extends BaseTest {
                 "    },\n" +
                 "    \"locale\": \"ua\",\n" +
                 "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                 "    \"account_id\": 2761,\n" +
                 "    \"wallet_id\": 3433,\n" +
                 "    \"service_id\": 3966,\n" +
@@ -212,7 +212,7 @@ public class PayPortPayIn extends BaseTest {
                     "                    \"    },\\n\" +\n" +
                     "                    \"    \\\"locale\\\": \\\"ua\\\",\\n\" +\n" +
                     "                    \"    \\\"customer_ip_address\\\": \\\"0.0.0.0\\\",\\n\" +\n" +
-                    "                    \"    \\\"external_customer_id\\\": \\\""+ UuidGenerate.generateUUID() +"\\\",\\n\" +\n" +
+                    "                    \"    \\\"external_customer_id\\\": \\\""+ BodyHelper.generateUUID() +"\\\",\\n\" +\n" +
                     "                    \"    \\\"account_id\\\": 2761,\\n\" +\n" +
                     "                    \"    \\\"wallet_id\\\": 3434,\\n\" +\n" +
                     "                    \"    \\\"service_id\\\": 3966,\\n\" +\n" +
@@ -345,7 +345,7 @@ public class PayPortPayIn extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"external_customer_id\": \""+UuidGenerate.generateUUID()+"\",\n" +
+                    "    \"external_customer_id\": \""+BodyHelper.generateUUID()+"\",\n" +
                     "    \"account_id\": 2761,\n" +
                     "    \"wallet_id\": 3433,\n" +
                     "    \"service_id\": 3966,\n" +
@@ -425,7 +425,7 @@ public class PayPortPayIn extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                    "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                     "    \"account_id\": 2761,\n" +
                     "    \"wallet_id\": 3434,\n" +
                     "    \"service_id\": 3966,\n" +
@@ -447,7 +447,7 @@ public class PayPortPayIn extends BaseTest {
                     "    },\n" +
                     "    \"locale\": \"ua\",\n" +
                     "    \"customer_ip_address\": \"0.0.0.0\",\n" +
-                    "    \"external_customer_id\": \""+ UuidGenerate.generateUUID() +"\",\n" +
+                    "    \"external_customer_id\": \""+ BodyHelper.generateUUID() +"\",\n" +
                     "    \"account_id\": 2761,\n" +
                     "    \"wallet_id\": 3434,\n" +
                     "    \"service_id\": 3966,\n" +

@@ -4,9 +4,7 @@ import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import projectSettlePay.BaseTest;
-import projectSettlePay.back.providers.PayPort;
 import projectSettlePay.back.providers.TwoPayler;
-import projectSettlePay.helper.UuidGenerate;
 
 @Test
 public class TwoPayllerH2H_test extends BaseTest {
